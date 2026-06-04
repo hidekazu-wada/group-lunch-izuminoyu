@@ -1,42 +1,75 @@
 ---
-// ③ こんな団体に（3つの利用パターン）
-// ページ標準背景（l-section）。白カード3枚＋番号バッジ（1/2/3）
-// SP1列 → tablet-up 3列グリッド
+// ③ こんな団体に（3つの利用パターン）— 自分ごと化の“仕分け”ブロック
+// 各カード：場面アイコン＋対象ラベル＋タイトル＋短文。軽くスキャンしやすく
+const cases = [
+  {
+    icon: "bus",
+    tag: "旅行代理店・バス会社",
+    title: "立ち寄りの団体昼食",
+    text: "観光バスツアーや各種団体の、移動途中のお昼に。湖畔の景色とともに。",
+  },
+  {
+    icon: "bed",
+    tag: "学校・教育旅行",
+    title: "ご宿泊後の昼食に",
+    text: "近隣にお泊まりの学校団体が、チェックアウト後にお食事をとる場所として。",
+  },
+  {
+    icon: "swap",
+    tag: "宿泊施設・幹事",
+    title: "入れ替え時の受け皿に",
+    text: "ご宿泊先の都合で館内でお食事が出せないときの、発着・入れ替えの受け皿として。",
+  },
+];
 ---
 
-<section class="l-section use-cases">
+<section class="use-cases l-section" id="use-cases">
   <div class="l-container">
     <div class="c-head">
       <h2 class="c-head__title">こんなご利用に、ぴったりです。</h2>
     </div>
 
     <ul class="use-cases__grid">
-      <li class="c-card use-cases__item">
-        <span class="use-cases__badge" aria-hidden="true">1</span>
-        <h3 class="use-cases__title">立ち寄りの団体昼食</h3>
-        <p class="use-cases__text">
-          観光バスツアーや各種団体の、移動途中のお昼に。湖畔の景色とともに。
-        </p>
-      </li>
+      {
+        cases.map((c) => (
+          <li class="use-cases__item c-card">
+            <div class="use-cases__head">
+              <span class="use-cases__icon" aria-hidden="true">
+                {c.icon === "bus" && (
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="5" width="18" height="11" rx="2" />
+                    <path d="M3 11h18" />
+                    <circle cx="7.5" cy="18.5" r="1.5" />
+                    <circle cx="16.5" cy="18.5" r="1.5" />
+                  </svg>
+                )}
+                {c.icon === "bed" && (
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M2 18v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5" />
+                    <path d="M2 18h20" />
+                    <path d="M6 11V8a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3" />
+                  </svg>
+                )}
+                {c.icon === "swap" && (
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M16 3l4 4-4 4" />
+                    <path d="M20 7H8a4 4 0 0 0-4 4v1" />
+                    <path d="M8 21l-4-4 4-4" />
+                    <path d="M4 17h12a4 4 0 0 0 4-4v-1" />
+                  </svg>
+                )}
+              </span>
+              <span class="use-cases__tag">{c.tag}</span>
+            </div>
 
-      <li class="c-card use-cases__item">
-        <span class="use-cases__badge" aria-hidden="true">2</span>
-        <h3 class="use-cases__title">ご宿泊後の昼食に</h3>
-        <p class="use-cases__text">
-          近隣にお泊まりの学校団体が、チェックアウト後にお食事をとる場所として。
-        </p>
-      </li>
-
-      <li class="c-card use-cases__item">
-        <span class="use-cases__badge" aria-hidden="true">3</span>
-        <h3 class="use-cases__title">入れ替え時の受け皿に</h3>
-        <p class="use-cases__text">
-          ご宿泊先の都合で館内でお食事が出せないときの、発着・入れ替えの受け皿として。
-        </p>
-      </li>
+            <h3 class="use-cases__title">{c.title}</h3>
+            <p class="use-cases__text">{c.text}</p>
+          </li>
+        ))
+      }
     </ul>
 
-    <p class="c-note use-cases__lead">
+    <p class="use-cases__lead c-note">
       旅行代理店・学校（教育旅行）・バス会社・幹事のみなさまの「団体の食事手配」を、まるごとサポートします。
     </p>
   </div>
@@ -51,7 +84,7 @@
     color: var(--main_color_1);
   }
 
-  // ---- グリッド（SP1列 → tablet-up 3列） ----
+  // SP1列 → tablet-up 3列
   .use-cases__grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -59,29 +92,52 @@
 
     @include tablet-up {
       grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-4);
     }
   }
 
-  // ---- カード（共通 c-card に番号バッジ用の余白を上乗せ） ----
   .use-cases__item {
     display: flex;
     flex-direction: column;
     gap: var(--space-2);
+    word-break: auto-phrase; // 日本語を文節で自然改行（タグ・タイトル・本文に継承）
   }
 
-  // ---- 番号バッジ（小さな丸＋数字） ----
-  .use-cases__badge {
+  // 場面アイコン＋対象ラベル
+  .use-cases__head {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-1);
+  }
+
+  .use-cases__icon {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 2.4em;
-    height: 2.4em;
+    flex-shrink: 0;
+    width: clamp(38px, 3.4vw, 46px);
+    height: clamp(38px, 3.4vw, 46px);
     border-radius: var(--radius-pill);
     background-color: var(--main_color_1);
     color: var(--main_color_3);
-    font-size: var(--fs-meta);
+
+    svg {
+      display: block;
+      width: 56%;
+      height: 56%;
+    }
+  }
+
+  .use-cases__tag {
+    display: inline-block;
+    padding: 0.25em 0.6em;
+    border-radius: 6px; // ピルより控えめな角丸（多行でも収まりが良い）
+    background-color: rgba(124, 99, 81, 0.1);
+    color: var(--main_color_1);
+    font-size: clamp(10px, 0.9vw, 12px); // タブレットの狭い列でも2行に収める
     font-weight: 700;
-    line-height: 1;
+    line-height: 1.35;
   }
 
   .use-cases__title {
@@ -92,13 +148,14 @@
 
   .use-cases__text {
     font-size: var(--fs-body);
-    line-height: var(--lh-loose);
+    line-height: var(--lh-body);
   }
 
-  // ---- 締めのひとこと（カード下・中央寄せ） ----
+  // 締めのひとこと
   .use-cases__lead {
     margin-top: var(--space-5);
     text-align: center;
     text-wrap: balance;
+    font-size: var(--fs-body);
   }
 </style>

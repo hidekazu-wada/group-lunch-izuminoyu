@@ -10,7 +10,7 @@
 
   &__label {
     display: inline-block;
-    font-size: clamp(12px, 1.5vw, 28px); // SPで大きすぎない
+    font-size: var(--fs-meta);
     letter-spacing: var(--ls-label);
     font-weight: 500;
     color: var(--main_color_1);
@@ -26,14 +26,14 @@
   }
 
   &__title {
-    font-size: clamp(24px, 4vw, 50px); // SP最小24px（トークン下限36pxは大きすぎ）
+    font-size: var(--fs-h2);
     font-weight: 700;
     line-height: var(--lh-tight);
   }
 
   &__lead {
     margin-top: var(--space-3);
-    font-size: clamp(15px, 1.8vw, 32px); // SP最小15px
+    font-size: var(--fs-body);
     line-height: var(--lh-loose);
   }
 

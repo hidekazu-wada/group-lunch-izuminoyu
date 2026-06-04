@@ -266,7 +266,7 @@ const badges = [
     border-radius: var(--radius-pill);
     background-color: rgba(255, 255, 255, 0.14);
     border: 1px solid rgba(241, 234, 228, 0.4);
-    font-size: clamp(11px, 1.4vw, 16px);
+    font-size: var(--fs-meta);
     font-weight: 700;
     line-height: 1.2;
     white-space: nowrap;
@@ -282,8 +282,8 @@ const badges = [
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    width: clamp(20px, 2.6vw, 44px);
-    height: clamp(20px, 2.6vw, 44px);
+    width: clamp(20px, 2.4vw, 38px);
+    height: clamp(20px, 2.4vw, 38px);
     border-radius: var(--radius-pill);
     background-color: var(--main_color_3);
     color: var(--main_color_1);
@@ -339,7 +339,7 @@ const badges = [
 
   // 母体ブランド（上・小さめ）
   .hero__logo-parent {
-    font-size: clamp(11px, 1.3vw, 15px);
+    font-size: var(--fs-meta);
     font-weight: 500;
     letter-spacing: var(--ls-label);
     opacity: 0.85;
@@ -347,7 +347,7 @@ const badges = [
 
   // メイン（いずみの湯／WCP）
   .hero__logo-main {
-    font-size: clamp(18px, 2.2vw, 30px);
+    font-size: var(--fs-h3);
     font-weight: 700;
     line-height: 1.2;
   }
@@ -365,21 +365,21 @@ const badges = [
   }
 
   .hero__title-lead {
-    font-size: clamp(20px, 3vw, 46px);
+    font-size: var(--fs-h2);
   }
 
   .hero__title-main {
-    font-size: clamp(36px, 6vw, 80px); // 貸切＝主役（SPでも1行で収まる）
+    font-size: var(--fs-hero); // 貸切＝主役
   }
 
   .hero__title-sub {
     margin-top: var(--space-2);
-    font-size: clamp(20px, 3vw, 46px);
+    font-size: var(--fs-h2);
   }
 
   .hero__sub {
     max-width: 33em;
-    font-size: clamp(14px, 1.7vw, 20px);
+    font-size: var(--fs-body);
     line-height: var(--lh-loose);
     text-shadow:
       0 1px 2px rgba(28, 20, 14, 0.4),
@@ -398,8 +398,7 @@ const badges = [
 
     // SPでボタン文字が大きすぎて折れるのを防ぐ
     .c-btn {
-      min-height: clamp(52px, 6vw, 64px);
-      font-size: clamp(15px, 1.8vw, 22px);
+      min-height: clamp(50px, 5vw, 60px);
     }
 
     // 電話ボタン文言：SPは短縮、tablet-up以上はフル（番号付き）

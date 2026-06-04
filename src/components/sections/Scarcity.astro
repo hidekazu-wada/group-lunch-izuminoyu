@@ -137,7 +137,7 @@ const pains = [
     background-color: var(--white);
     border-radius: var(--radius-card);
     box-shadow: var(--shadow-soft);
-    font-size: clamp(14px, 1.7vw, 21px);
+    font-size: var(--fs-body);
     line-height: var(--lh-body);
   }
 
@@ -187,7 +187,7 @@ const pains = [
   .scarcity__cap {
     display: block;
     padding: var(--space-1) var(--space-2);
-    font-size: clamp(12px, 1.4vw, 16px);
+    font-size: var(--fs-meta);
     font-weight: 700;
     text-align: center;
     white-space: nowrap; // 1行に収める
@@ -234,14 +234,14 @@ const pains = [
   }
 
   .scarcity__relief-head {
-    font-size: clamp(20px, 2.6vw, 36px);
+    font-size: var(--fs-h2);
     font-weight: 700;
     line-height: var(--lh-tight);
     margin-bottom: var(--space-3);
   }
 
   .scarcity__relief-text {
-    font-size: clamp(14px, 1.7vw, 20px);
+    font-size: var(--fs-body);
     line-height: var(--lh-loose);
   }
 
@@ -253,7 +253,7 @@ const pains = [
   }
 
   .scarcity__stats-note {
-    font-size: clamp(13px, 1.5vw, 18px);
+    font-size: var(--fs-meta);
     font-weight: 500;
     opacity: 0.85;
     margin-bottom: var(--space-2);
@@ -288,26 +288,26 @@ const pains = [
 
   // 「最大」など数字の前置き（小さめ）
   .scarcity__stat-pre {
-    font-size: clamp(13px, 1.6vw, 22px);
+    font-size: var(--fs-h3);
     font-weight: 700;
     margin-right: 0.15em;
   }
 
   .scarcity__stat-num {
-    font-size: clamp(40px, 6vw, 75px);
+    font-size: var(--fs-hero);
     font-weight: 700;
     line-height: 1;
     color: var(--main_color_2); // 数字アクセント
   }
 
   .scarcity__stat-unit {
-    font-size: clamp(20px, 2.5vw, 32px);
+    font-size: var(--fs-h3);
     font-weight: 700;
   }
 
   .scarcity__stat-label {
     display: block;
     margin-top: var(--space-1);
-    font-size: clamp(12px, 1.4vw, 18px);
+    font-size: var(--fs-meta);
   }
 </style>

@@ -51,6 +51,16 @@ b {
   font-weight: 700;
 }
 
+// 見出しは日本語を文節で自然改行（Chrome系で有効・他はフォールバック）
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  word-break: auto-phrase;
+}
+
 // 自動リンク化（電話/住所）抑制用（CLAUDE.md準拠）
 .no-link {
   text-decoration: none;
