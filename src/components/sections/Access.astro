@@ -1,0 +1,207 @@
+---
+// ⑪ アクセス
+// 西湖畔の施設までの案内。情報ブロック＋Googleマップ（SP縦／PC2カラム）
+import { SITE } from '../../consts';
+---
+
+<section class="l-section l-section--cream access" id="access">
+  <div class="l-container">
+    <header class="c-head">
+      <p class="c-head__label">ACCESS</p>
+      <h2 class="c-head__title">アクセス</h2>
+    </header>
+
+    <div class="access__grid">
+      <!-- 情報ブロック -->
+      <div class="access__info c-card">
+        <p class="access__facility">
+          HAMAYOUリゾート Wonder Child Park ／ いずみの湯
+        </p>
+
+        <dl class="access__list">
+          <div class="access__row">
+            <dt class="access__term">住所</dt>
+            <dd class="access__desc">
+              <!-- 🔴 住所は consts.ts に集約（確定後そこを差し替え） -->
+              <a class="no-link">〒{SITE.zip}　{SITE.address}</a>
+            </dd>
+          </div>
+
+          <div class="access__row">
+            <dt class="access__term">駐車場</dt>
+            <dd class="access__desc">大型バス6台駐車可（駐車料込み）</dd>
+          </div>
+
+          <div class="access__row">
+            <dt class="access__term">営業時間</dt>
+            <dd class="access__desc">
+              <!-- 🔴 営業時間・営業日 未確定（ダミー） -->
+              {SITE.openHours}<br />
+              {SITE.openDays}
+            </dd>
+          </div>
+        </dl>
+
+        <figure class="access__figure c-figure">
+          <img
+            src="/images/flyer/facility_1_bus_parking.png"
+            alt="大型バスの駐車スペース"
+            loading="lazy"
+          />
+          <figcaption class="c-figure__cap">大型バス6台分の駐車スペース</figcaption>
+        </figure>
+
+        <p class="access__note c-note">
+          <a
+            class="access__maplink"
+            href={SITE.mapLink}
+            target="_blank"
+            rel="noopener"
+          >
+            地図を開く（Googleマップ）
+          </a>
+        </p>
+      </div>
+
+      <!-- Googleマップ -->
+      <div class="access__map">
+        <iframe
+          src={SITE.mapEmbedSrc}
+          title="いずみの湯 周辺地図"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  @import "../../styles/variables";
+  @import "../../styles/functions";
+  @import "../../styles/mixins";
+
+  .access__grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+
+    @include desktop-up {
+      flex-direction: row;
+      align-items: stretch;
+      gap: var(--space-5);
+    }
+  }
+
+  .access__info {
+    color: var(--main_color_1);
+
+    @include desktop-up {
+      flex: 1 1 0;
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  .access__facility {
+    font-size: var(--fs-h3);
+    font-weight: 700;
+    line-height: var(--lh-tight);
+    margin-bottom: var(--space-3);
+  }
+
+  .access__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    margin: 0;
+  }
+
+  .access__row {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+
+    @include tablet-up {
+      flex-direction: row;
+      gap: var(--space-3);
+    }
+  }
+
+  .access__term {
+    flex-shrink: 0;
+    font-size: var(--fs-meta);
+    font-weight: 700;
+    line-height: var(--lh-body);
+    color: var(--main_color_1);
+    opacity: 0.7;
+
+    @include tablet-up {
+      width: 6em;
+    }
+  }
+
+  .access__desc {
+    margin: 0;
+    font-size: var(--fs-body);
+    line-height: var(--lh-loose);
+    color: var(--main_color_1);
+  }
+
+  // 電話/住所の自動リンク化対策
+  .no-link {
+    text-decoration: none;
+    pointer-events: none;
+    color: inherit;
+  }
+
+  .access__figure {
+    margin-top: var(--space-4);
+    aspect-ratio: 16 / 9;
+  }
+
+  .access__note {
+    margin-top: var(--space-3);
+
+    @include desktop-up {
+      margin-top: auto;
+      padding-top: var(--space-3);
+    }
+  }
+
+  .access__maplink {
+    color: var(--main_color_1);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+    transition: color var(--dur-base) var(--ease-soft);
+
+    @include hover {
+      &:hover {
+        color: var(--main_color_2);
+      }
+    }
+  }
+
+  .access__map {
+    width: 100%;
+    border-radius: var(--radius-card);
+    overflow: clip;
+    box-shadow: var(--shadow-soft);
+
+    @include desktop-up {
+      flex: 1 1 0;
+    }
+
+    iframe {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border: 0;
+      border-radius: var(--radius-card);
+
+      @include desktop-up {
+        height: 100%;
+      }
+    }
+  }
+</style>

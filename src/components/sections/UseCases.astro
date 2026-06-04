@@ -1,0 +1,104 @@
+---
+// ③ こんな団体に（3つの利用パターン）
+// ページ標準背景（l-section）。白カード3枚＋番号バッジ（1/2/3）
+// SP1列 → tablet-up 3列グリッド
+---
+
+<section class="l-section use-cases">
+  <div class="l-container">
+    <div class="c-head">
+      <h2 class="c-head__title">こんなご利用に、ぴったりです。</h2>
+    </div>
+
+    <ul class="use-cases__grid">
+      <li class="c-card use-cases__item">
+        <span class="use-cases__badge" aria-hidden="true">1</span>
+        <h3 class="use-cases__title">立ち寄りの団体昼食</h3>
+        <p class="use-cases__text">
+          観光バスツアーや各種団体の、移動途中のお昼に。湖畔の景色とともに。
+        </p>
+      </li>
+
+      <li class="c-card use-cases__item">
+        <span class="use-cases__badge" aria-hidden="true">2</span>
+        <h3 class="use-cases__title">ご宿泊後の昼食に</h3>
+        <p class="use-cases__text">
+          近隣にお泊まりの学校団体が、チェックアウト後にお食事をとる場所として。
+        </p>
+      </li>
+
+      <li class="c-card use-cases__item">
+        <span class="use-cases__badge" aria-hidden="true">3</span>
+        <h3 class="use-cases__title">入れ替え時の受け皿に</h3>
+        <p class="use-cases__text">
+          ご宿泊先の都合で館内でお食事が出せないときの、発着・入れ替えの受け皿として。
+        </p>
+      </li>
+    </ul>
+
+    <p class="c-note use-cases__lead">
+      旅行代理店・学校（教育旅行）・バス会社・幹事のみなさまの「団体の食事手配」を、まるごとサポートします。
+    </p>
+  </div>
+</section>
+
+<style lang="scss">
+  @import "../../styles/variables";
+  @import "../../styles/functions";
+  @import "../../styles/mixins";
+
+  .use-cases {
+    color: var(--main_color_1);
+  }
+
+  // ---- グリッド（SP1列 → tablet-up 3列） ----
+  .use-cases__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
+
+    @include tablet-up {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  // ---- カード（共通 c-card に番号バッジ用の余白を上乗せ） ----
+  .use-cases__item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  // ---- 番号バッジ（小さな丸＋数字） ----
+  .use-cases__badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.4em;
+    height: 2.4em;
+    border-radius: var(--radius-pill);
+    background-color: var(--main_color_1);
+    color: var(--main_color_3);
+    font-size: var(--fs-meta);
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .use-cases__title {
+    font-size: var(--fs-h3);
+    font-weight: 700;
+    line-height: var(--lh-tight);
+  }
+
+  .use-cases__text {
+    font-size: var(--fs-body);
+    line-height: var(--lh-loose);
+  }
+
+  // ---- 締めのひとこと（カード下・中央寄せ） ----
+  .use-cases__lead {
+    margin-top: var(--space-5);
+    text-align: center;
+    text-wrap: balance;
+  }
+</style>

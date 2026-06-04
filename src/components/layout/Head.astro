@@ -1,0 +1,85 @@
+---
+// <head> の中身（meta / OGP / フォント / GA4 / 構造化データ）
+// index.astro 側で <head><Head /></head> として使う
+import { SITE, SEO } from '../../consts';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title = SEO.title, description = SEO.description } = Astro.props;
+const ga4Id = SITE.ga4Id; // 🔴 環境変数 PUBLIC_GA4_ID（未発行時はダミー G-XXXXXXXXXX）
+
+// OGP画像は絶対URLが望ましい。Astro.site 未設定でも動くよう相対パスをフォールバック
+const ogImage = new URL(SEO.ogImage, Astro.site ?? Astro.url).toString();
+
+// 構造化データ（LocalBusiness）— SEO加点（任意）
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  name: 'いずみの湯（HAMAYOUリゾート Wonder Child Park）',
+  description,
+  telephone: SITE.tel,
+  address: {
+    '@type': 'PostalAddress',
+    postalCode: SITE.zip,
+    addressRegion: '山梨県',
+    addressLocality: '南都留郡富士河口湖町',
+    streetAddress: '西湖987',
+    addressCountry: 'JP',
+  },
+};
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="generator" content={Astro.generator} />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<meta name="format-detection" content="telephone=no" />
+
+<!-- OGP / Twitter -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:locale" content="ja_JP" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage} />
+
+<!-- フォント：Zen Maru Gothic（本文／本LPは Noto Serif JP 不使用） -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&display=swap"
+/>
+
+<!-- 構造化データ -->
+<script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
+
+<!-- Google tag (gtag.js) — GA4 🔴 Measurement ID は環境変数 PUBLIC_GA4_ID（未発行時ダミー） -->
+<script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${ga4Id}`}></script>
+<script is:inline define:vars={{ ga4Id }}>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  window.gtag = gtag;
+  gtag('js', new Date());
+  gtag('config', ga4Id);
+
+  // data-ga-event 属性を持つ要素のクリックを計測（tel_tap / pdf_download）
+  document.addEventListener('click', function (e) {
+    var el = e.target.closest && e.target.closest('[data-ga-event]');
+    if (!el) return;
+    var name = el.getAttribute('data-ga-event');
+    var label = el.getAttribute('data-ga-label') || undefined;
+    gtag('event', name, { event_category: 'cta', event_label: label });
+  });
+</script>

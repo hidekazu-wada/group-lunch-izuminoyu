@@ -1,45 +1,51 @@
 ---
-// メインSCSSファイルをインポート
-import "../styles/main.scss";
+// いずみの湯 団体昼食LP（単独ページ）
+import '../styles/main.scss';
+
+import Head from '../components/layout/Head.astro';
+import CvBar from '../components/layout/CvBar.astro';
+import CtaBand from '../components/layout/CtaBand.astro';
+import Footer from '../components/layout/Footer.astro';
+
+import Hero from '../components/sections/Hero.astro';
+import Scarcity from '../components/sections/Scarcity.astro';
+import UseCases from '../components/sections/UseCases.astro';
+import Reasons from '../components/sections/Reasons.astro';
+import Venue from '../components/sections/Venue.astro';
+import Menu from '../components/sections/Menu.astro';
+import PlusAlpha from '../components/sections/PlusAlpha.astro';
+import Onsen from '../components/sections/Onsen.astro';
+import Pricing from '../components/sections/Pricing.astro';
+import Downloads from '../components/sections/Downloads.astro';
+import Access from '../components/sections/Access.astro';
+import Faq from '../components/sections/Faq.astro';
+import Contact from '../components/sections/Contact.astro';
 ---
 
+<!doctype html>
 <html lang="ja">
   <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <title>Astro</title>
+    <Head />
   </head>
   <body>
-    <h1>Kuwarubi</h1>
-    <p class="test">SCSSテスト</p>
-    <p>テンプレート</p>
+    <main>
+      <Hero />
+      <Scarcity />
+      <UseCases />
+      <Reasons />
+      <Venue />
+      <Menu />
+      <PlusAlpha />
+      <Onsen />
+      <CtaBand />
+      <Pricing />
+      <Downloads />
+      <Access />
+      <Faq />
+      <Contact />
+    </main>
+
+    <Footer />
+    <CvBar />
   </body>
 </html>
-
-<style lang="scss">
-  // 必要なmixin/functionをインポート
-  @import "../styles/variables";
-  @import "../styles/functions";
-  @import "../styles/mixins";
-
-  $primary-color: #ff6b35;
-
-  .test {
-    color: $primary-color;
-    font-size: spx(20);
-    @include tablet-up {
-      font-size: tpx(24);
-      color: rgb(0, 255, 110);
-    }
-    @include desktop-up {
-      font-size: ppx(28);
-      color: rgb(0, 110, 255);
-    }
-
-    &:hover {
-      color: darken($primary-color, 20%);
-    }
-  }
-</style>

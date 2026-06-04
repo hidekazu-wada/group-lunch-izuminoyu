@@ -1,0 +1,437 @@
+---
+// ⑬ 問い合わせ（最終CV）— Formspree送信＋GA4 form_submit＋honeypot
+import { SITE } from '../../consts';
+const action = SITE.formspreeAction; // 🔴 FORM_ID未発行のうちは送信は失敗する（環境変数 PUBLIC_FORMSPREE_ID で有効化）
+---
+
+<section class="contact l-section l-section--cream" id="contact">
+  <div class="l-container l-container--narrow">
+    <div class="c-head">
+      <p class="c-head__label">CONTACT</p>
+      <h2 class="c-head__title">まずは、人数とご希望日をお聞かせください。</h2>
+      <p class="c-head__lead">
+        ご予算・人数・日程にあわせてご案内します。お見積り・ご相談だけでも、お気軽にどうぞ。
+      </p>
+    </div>
+
+    <!-- 予約の流れ（3ステップ） -->
+    <ol class="contact__steps">
+      <li class="contact__step">
+        <span class="contact__step-num">1</span>
+        <span class="contact__step-text">お電話・フォームでご相談</span>
+      </li>
+      <li class="contact__step">
+        <span class="contact__step-num">2</span>
+        <span class="contact__step-text">プラン・お見積りのご案内</span>
+      </li>
+      <li class="contact__step">
+        <span class="contact__step-num">3</span>
+        <span class="contact__step-text">ご予約確定</span>
+      </li>
+    </ol>
+
+    <!-- 問い合わせフォーム -->
+    <form class="contact__form" id="contact-form" action={action} method="POST" novalidate>
+      <input type="hidden" name="_subject" value="【LP】いずみの湯 団体昼食 お問い合わせ" />
+      <!-- honeypot（スパム対策・人間には非表示） -->
+      <input type="text" name="_gotcha" class="contact__hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+      <div class="contact__grid">
+        <div class="contact__field">
+          <label class="contact__label" for="f-group">団体名 <span class="contact__req">必須</span></label>
+          <input class="contact__input" id="f-group" name="団体名" type="text" required autocomplete="organization" />
+        </div>
+
+        <div class="contact__field">
+          <label class="contact__label" for="f-name">ご担当者名 <span class="contact__req">必須</span></label>
+          <input class="contact__input" id="f-name" name="ご担当者名" type="text" required autocomplete="name" />
+        </div>
+
+        <div class="contact__field">
+          <label class="contact__label" for="f-tel">電話番号 <span class="contact__req">必須</span></label>
+          <input class="contact__input" id="f-tel" name="電話番号" type="tel" required autocomplete="tel" inputmode="tel" />
+        </div>
+
+        <div class="contact__field">
+          <label class="contact__label" for="f-email">メールアドレス <span class="contact__req">必須</span></label>
+          <input class="contact__input" id="f-email" name="メールアドレス" type="email" required autocomplete="email" inputmode="email" />
+        </div>
+
+        <div class="contact__field">
+          <label class="contact__label" for="f-date">希望日</label>
+          <input class="contact__input" id="f-date" name="希望日" type="date" />
+        </div>
+
+        <div class="contact__field">
+          <label class="contact__label" for="f-time">希望時間帯</label>
+          <input class="contact__input" id="f-time" name="希望時間帯" type="text" placeholder="例）11:30頃 着" />
+        </div>
+
+        <div class="contact__field">
+          <label class="contact__label" for="f-count">予定人数 <span class="contact__req">必須</span></label>
+          <input class="contact__input" id="f-count" name="予定人数" type="number" min="1" required inputmode="numeric" placeholder="例）80" />
+        </div>
+      </div>
+
+      <fieldset class="contact__fieldset">
+        <legend class="contact__legend">利用内容（複数選択可）</legend>
+        <div class="contact__choices">
+          {['昼食', '温泉', '休憩', '体験'].map((v) => (
+            <label class="contact__choice">
+              <input type="checkbox" name="利用内容" value={v} />
+              <span>{v}</span>
+            </label>
+          ))}
+        </div>
+      </fieldset>
+
+      <fieldset class="contact__fieldset">
+        <legend class="contact__legend">ご希望メニュー（複数選択可）</legend>
+        <div class="contact__choices">
+          {['カレーライス', '牛丼', 'ほうとう定食'].map((v) => (
+            <label class="contact__choice">
+              <input type="checkbox" name="ご希望メニュー" value={v} />
+              <span>{v}</span>
+            </label>
+          ))}
+        </div>
+      </fieldset>
+
+      <div class="contact__field">
+        <label class="contact__label" for="f-note">アレルギー・ご要望</label>
+        <textarea class="contact__input contact__textarea" id="f-note" name="アレルギー・ご要望" rows="4" placeholder="アレルギーの有無、ご予算、その他ご要望など"></textarea>
+      </div>
+
+      <p class="contact__error" id="contact-error" role="alert" hidden>
+        送信に失敗しました。お手数ですが、お電話（{SITE.tel}）でもお問い合わせいただけます。
+      </p>
+
+      <button class="c-btn c-btn--form contact__submit" type="submit">この内容で問い合わせる</button>
+
+      <p class="c-note contact__privacy">
+        ※ いただいた情報はお問い合わせ対応の目的にのみ利用します。
+      </p>
+    </form>
+
+    <!-- 送信完了（インラインサンクス） -->
+    <div class="contact__thanks" id="contact-thanks" hidden role="status">
+      <p class="contact__thanks-title">お問い合わせ、ありがとうございます。</p>
+      <p class="contact__thanks-text">
+        担当者より折り返しご連絡いたします。お急ぎの場合は、お電話でもご相談を承ります。
+      </p>
+    </div>
+
+    <!-- 電話・メール（フォーム以外の動線） -->
+    <div class="contact__direct">
+      <a
+        class="c-btn c-btn--tel"
+        href={SITE.telHref}
+        data-ga-event="tel_tap"
+        data-ga-label="contact"
+      >
+        <span class="c-btn__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"></path>
+          </svg>
+        </span>
+        お電話｜{SITE.tel}
+      </a>
+      <!-- 🔴 電話受付時間 未確定（ダミー） -->
+      <p class="c-note contact__reception">{SITE.telReception}</p>
+      <!-- 🔴 メール末尾ドメイン 未確定（ダミー） -->
+      <p class="contact__mail">
+        メールでのお問い合わせ：<a href={SITE.emailHref}>{SITE.email}</a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Formspree へ非同期送信し、成功で GA4 form_submit を計測＋インラインサンクス表示
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  const thanks = document.getElementById('contact-thanks');
+  const errorEl = document.getElementById('contact-error');
+
+  if (form && thanks) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (errorEl) errorEl.hidden = true;
+
+      // honeypot に値が入っていたら（ボット）静かに中断
+      const hp = form.querySelector<HTMLInputElement>('input[name="_gotcha"]');
+      if (hp && hp.value) return;
+
+      // ネイティブの必須バリデーション
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      const submitBtn = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = '送信中…';
+      }
+
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { Accept: 'application/json' },
+        });
+
+        if (res.ok) {
+          // GA4 イベント：CV
+          (window as any).gtag?.('event', 'form_submit', {
+            event_category: 'cta',
+            event_label: 'contact',
+          });
+          form.hidden = true;
+          thanks.hidden = false;
+          thanks.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else {
+          throw new Error('Formspree responded ' + res.status);
+        }
+      } catch (err) {
+        if (errorEl) errorEl.hidden = false;
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'この内容で問い合わせる';
+        }
+      }
+    });
+  }
+</script>
+
+<style lang="scss">
+  @import "../../styles/variables";
+  @import "../../styles/functions";
+  @import "../../styles/mixins";
+
+  // 予約の流れ ----------------------------------------------
+  .contact__steps {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    margin-bottom: var(--space-5);
+
+    @include tablet-up {
+      flex-direction: row;
+      justify-content: center;
+      align-items: stretch;
+      gap: var(--space-3);
+    }
+  }
+
+  .contact__step {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-3);
+    background-color: var(--white);
+    border-radius: var(--radius-pill);
+    box-shadow: var(--shadow-soft);
+    font-weight: 700;
+    font-size: var(--fs-meta);
+
+    @include tablet-up {
+      flex: 1;
+      position: relative;
+    }
+
+    // 矢印（tablet-up で項目間に）
+    @include tablet-up {
+      &:not(:last-child)::after {
+        content: "→";
+        position: absolute;
+        right: calc(var(--space-3) * -1);
+        top: 50%;
+        transform: translate(50%, -50%);
+        color: var(--main_color_1);
+        opacity: 0.6;
+      }
+    }
+  }
+
+  .contact__step-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2em;
+    height: 2em;
+    flex-shrink: 0;
+    border-radius: var(--radius-pill);
+    background-color: var(--main_color_1);
+    color: var(--main_color_3);
+  }
+
+  // フォーム ------------------------------------------------
+  .contact__form {
+    background-color: var(--white);
+    border-radius: var(--radius-card);
+    padding: var(--space-4);
+    box-shadow: var(--shadow-card);
+
+    @include tablet-up {
+      padding: var(--space-5);
+    }
+  }
+
+  .contact__hp {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .contact__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
+
+    @include tablet-up {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .contact__field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+  .contact__label {
+    font-weight: 700;
+    font-size: var(--fs-meta);
+  }
+
+  .contact__req {
+    display: inline-block;
+    margin-left: var(--space-1);
+    padding: 0 var(--space-1);
+    border-radius: var(--radius-tag);
+    background-color: var(--accent-red);
+    color: var(--white);
+    font-size: 0.7em;
+    vertical-align: middle;
+  }
+
+  .contact__input {
+    width: 100%;
+    padding: var(--space-2);
+    border: 2px solid var(--gray-cfcfcf);
+    border-radius: var(--radius-card);
+    background-color: var(--white);
+    font-family: var(--font-base);
+    font-size: var(--fs-meta);
+    color: var(--main_color_1);
+    transition: border-color var(--dur-base) var(--ease-soft);
+
+    &:focus {
+      outline: none;
+      border-color: var(--blue_1);
+    }
+  }
+
+  .contact__textarea {
+    resize: vertical;
+    min-height: 6em;
+  }
+
+  .contact__fieldset {
+    margin-top: var(--space-3);
+  }
+
+  .contact__legend {
+    font-weight: 700;
+    font-size: var(--fs-meta);
+    margin-bottom: var(--space-2);
+  }
+
+  .contact__choices {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .contact__choice {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    padding: var(--space-1) var(--space-3);
+    border: 2px solid var(--gray-cfcfcf);
+    border-radius: var(--radius-pill);
+    font-size: var(--fs-meta);
+    cursor: pointer;
+    transition:
+      border-color var(--dur-base) var(--ease-soft),
+      background-color var(--dur-base) var(--ease-soft);
+
+    input {
+      width: 1.1em;
+      height: 1.1em;
+      accent-color: var(--blue_1);
+    }
+
+    &:has(input:checked) {
+      border-color: var(--blue_1);
+      background-color: rgba(90, 138, 173, 0.1);
+    }
+  }
+
+  .contact__error {
+    margin-top: var(--space-3);
+    color: var(--accent-red);
+    font-weight: 700;
+    font-size: var(--fs-meta);
+  }
+
+  .contact__submit {
+    width: 100%;
+    margin-top: var(--space-4);
+  }
+
+  .contact__privacy {
+    margin-top: var(--space-2);
+    text-align: center;
+  }
+
+  // サンクス -----------------------------------------------
+  .contact__thanks {
+    background-color: var(--white);
+    border-radius: var(--radius-card);
+    padding: var(--space-6) var(--space-4);
+    box-shadow: var(--shadow-card);
+    text-align: center;
+  }
+
+  .contact__thanks-title {
+    font-size: var(--fs-h3);
+    font-weight: 700;
+    color: var(--blue_1);
+    margin-bottom: var(--space-2);
+  }
+
+  .contact__thanks-text {
+    font-size: var(--fs-body);
+    line-height: var(--lh-loose);
+  }
+
+  // 電話・メール導線 ---------------------------------------
+  .contact__direct {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
+    margin-top: var(--space-5);
+    text-align: center;
+  }
+
+  .contact__mail a {
+    font-weight: 700;
+    color: var(--blue_1);
+    text-decoration: underline;
+  }
+</style>

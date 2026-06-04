@@ -1,0 +1,422 @@
+---
+// ① ファーストビュー（ヒーロー）
+// 序列：ワンストップ×貸切 → 規模 → 環境／要点帯は「安心バッジ帯」／電話を主CTAに
+// 背景：西湖の水際。富士山は控えめ、湖の景観を主役に
+import { SITE } from "../../consts";
+
+// 安心材料バッジ（手配者の不安に先回り）
+const badges = [
+  { label: "最大250名 完全貸切", short: "250名 貸切", icon: "group" },
+  { label: "大型バス6台OK", short: "バス6台OK", icon: "bus" },
+  { label: "雨天OK（屋内100畳）", short: "雨天OK", icon: "rain" },
+  { label: "温泉併設", short: "温泉併設", icon: "onsen" },
+  { label: "団体予約制", short: "予約制", icon: "calendar" },
+];
+---
+
+<section class="hero" id="hero">
+  {
+    /* ヒーロー画像（生成した仮ビジュアル）。SPは縦版に出し分け。本番写真ができたら同パスで差し替え可 */
+  }
+  <picture class="hero__media">
+    <source
+      media="(max-width: 743px)"
+      srcset="/images/hero/hero_lakeside_sp.png"
+    />
+    <img
+      class="hero__bg"
+      src="/images/hero/hero_lakeside.png"
+      alt="西湖畔の貸切広場に集う団体と大型バス、奥に富士山"
+      width="1672"
+      height="941"
+      fetchpriority="high"
+    />
+  </picture>
+  <div class="hero__scrim" aria-hidden="true"></div>
+
+  <!-- 要点帯（安心バッジ帯） -->
+  <div class="hero__band">
+    <ul class="hero__badges">
+      {
+        badges.map((b, i) => (
+          <Fragment>
+            {i === 3 && <li class="hero__badge-break" aria-hidden="true" />}
+            <li class="hero__badge">
+            <span class="hero__badge-icon" aria-hidden="true">
+              {b.icon === "group" && (
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                  <circle cx="9" cy="7" r="4" />
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                </svg>
+              )}
+              {b.icon === "bus" && (
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect x="3" y="5" width="18" height="11" rx="2" />
+                  <path d="M3 11h18" />
+                  <circle cx="7.5" cy="18.5" r="1.5" />
+                  <circle cx="16.5" cy="18.5" r="1.5" />
+                </svg>
+              )}
+              {b.icon === "rain" && (
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M12 3v1.5" />
+                  <path d="M4 13a8 8 0 0 1 16 0z" />
+                  <path d="M12 13v6a2 2 0 0 1-4 0" />
+                </svg>
+              )}
+              {b.icon === "onsen" && (
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M8 7c0-1.5-1.5-2-1.5-3.5C6.5 2 8 1.5 8 1.5" />
+                  <path d="M12 7c0-1.5-1.5-2-1.5-3.5C10.5 2 12 1.5 12 1.5" />
+                  <path d="M16 7c0-1.5-1.5-2-1.5-3.5C14.5 2 16 1.5 16 1.5" />
+                  <path d="M3 12h18v4a6 6 0 0 1-6 6H9a6 6 0 0 1-6-6z" />
+                </svg>
+              )}
+              {b.icon === "calendar" && (
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect x="3" y="4" width="18" height="17" rx="2" />
+                  <path d="M3 9h18M8 2v4M16 2v4" />
+                  <path d="M9 14l2 2 4-4" />
+                </svg>
+              )}
+            </span>
+            <span class="hero__badge-label">
+              <span class="hero__badge-full">{b.label}</span>
+              <span class="hero__badge-short">{b.short}</span>
+            </span>
+            </li>
+          </Fragment>
+        ))
+      }
+    </ul>
+  </div>
+
+  <div class="hero__inner l-container">
+    <p class="hero__logo">
+      <span class="hero__logo-parent">HAMAYOU RESORT</span>
+      <span class="hero__logo-main">いずみの湯 ／ Wonder Child Park</span>
+    </p>
+
+    <h1 class="hero__title">
+      <span class="hero__title-lead"
+        >食事も、温泉も、お土産も、写真撮影も、</span
+      >
+      <span class="hero__title-main">ひと組貸切で。</span>
+      <span class="hero__title-sub">西湖のほとり、団体専用250名の昼食処。</span>
+    </h1>
+
+    <p class="hero__sub">
+      大型バス6台で乗りつけて、お食事・温泉・お土産までこの一か所。混み合う人気店に左右されず、自分たちのペースで。雨の日も、約100畳の屋内会場で安心です。
+    </p>
+
+    <div class="hero__cta c-cta">
+      <a
+        class="c-btn c-btn--tel"
+        href={SITE.telHref}
+        data-ga-event="tel_tap"
+        data-ga-label="hero"
+      >
+        <span class="c-btn__icon" aria-hidden="true">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path
+              d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"
+            ></path>
+          </svg>
+        </span>
+        <span class="hero__tel-full">お電話で相談する｜{SITE.tel}</span>
+        <span class="hero__tel-short">お電話で相談</span>
+      </a>
+      <a class="c-btn c-btn--form" href="#contact">問い合わせフォーム</a>
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  @import "../../styles/variables";
+  @import "../../styles/functions";
+  @import "../../styles/mixins";
+
+  .hero {
+    position: relative;
+    z-index: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; // 帯=上 / コンテンツ=下
+    min-height: 100svh;
+    padding-bottom: var(--space-4); // SPはコンテンツを下げる
+    overflow: clip; // 背景の拡大はみ出しを抑制
+    color: var(--main_color_3);
+
+    @include tablet-up {
+      padding-bottom: var(--space-6); // PC/タブレットはコンテンツを上げる
+    }
+    @include desktop-up {
+      padding-bottom: var(--space-7);
+    }
+  }
+
+  // 背景画像（背面レイヤー：flexフローから外し、帯を最上部に密着させる）
+  .hero__media {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+  }
+
+  .hero__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 58%;
+  }
+
+  // スクリム：上〜中央は素の明るい画像、文字のある下部だけ自然に暗く（縁取りはしない）
+  .hero__scrim {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(
+      180deg,
+      rgba(38, 28, 22, 0) 0%,
+      rgba(38, 28, 22, 0) 44%,
+      rgba(38, 28, 22, 0.45) 74%,
+      rgba(38, 28, 22, 0.84) 100%
+    );
+  }
+
+  // 安心バッジ帯
+  .hero__band {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    background-color: var(--surface-brown-solid); // フッターと同じベタ茶
+  }
+
+  .hero__badges {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(6px, 0.9vw, 12px);
+    // 上下の余白をしっかり確保（詰まり解消）。上下のみ広め
+    padding: clamp(13px, 1.9vw, 26px) clamp(12px, 3vw, 40px);
+  }
+
+  // SPで3+2に割るための強制改行（tablet-up以上は1行なので無効化）
+  .hero__badge-break {
+    flex-basis: 100%;
+    height: 0;
+
+    @include tablet-up {
+      display: none;
+    }
+  }
+
+  // チップ化してメリハリを出す（角丸枠＋アイコンは丸ベタ抜き）。SPは小さく簡潔に
+  .hero__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: spx(6);
+    padding: spx(4) spx(12) spx(4) spx(4);
+    border-radius: var(--radius-pill);
+    background-color: rgba(255, 255, 255, 0.14);
+    border: 1px solid rgba(241, 234, 228, 0.4);
+    font-size: clamp(11px, 1.4vw, 16px);
+    font-weight: 700;
+    line-height: 1.2;
+    white-space: nowrap;
+
+    @include tablet-up {
+      gap: tpx(10);
+      padding: tpx(6) tpx(20) tpx(6) tpx(6);
+    }
+  }
+
+  .hero__badge-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: clamp(20px, 2.6vw, 44px);
+    height: clamp(20px, 2.6vw, 44px);
+    border-radius: var(--radius-pill);
+    background-color: var(--main_color_3);
+    color: var(--main_color_1);
+
+    svg {
+      display: block;
+      width: 60%;
+      height: 60%;
+    }
+  }
+
+  // バッジ文言：SPは短縮版、tablet-up以上はフル版
+  .hero__badge-full {
+    display: none;
+  }
+  .hero__badge-short {
+    display: inline;
+  }
+
+  @include tablet-up {
+    .hero__badge-full {
+      display: inline;
+    }
+    .hero__badge-short {
+      display: none;
+    }
+  }
+
+  .hero__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-3);
+  }
+
+  // 空にかかっても読めるよう、ロゴ下に控えめなフロストプレートを敷く
+  .hero__logo {
+    display: inline-flex;
+    flex-direction: column;
+    align-self: flex-start;
+    gap: 2px;
+    margin-bottom: var(--space-3); // メインコピーとの間を空ける
+    padding: clamp(8px, 1vw, 14px) clamp(14px, 1.6vw, 22px);
+    border-radius: var(--radius-card);
+    background-color: rgba(40, 30, 24, 0.34);
+    backdrop-filter: blur(6px);
+    text-shadow: 0 1px 6px rgba(28, 20, 14, 0.45);
+
+    @include tablet-up {
+      margin-bottom: var(--space-4);
+    }
+  }
+
+  // 母体ブランド（上・小さめ）
+  .hero__logo-parent {
+    font-size: clamp(11px, 1.3vw, 15px);
+    font-weight: 500;
+    letter-spacing: var(--ls-label);
+    opacity: 0.85;
+  }
+
+  // メイン（いずみの湯／WCP）
+  .hero__logo-main {
+    font-size: clamp(18px, 2.2vw, 30px);
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  // 見出し：列挙(ワンストップ) → 貸切(主役) → 西湖/規模
+  .hero__title {
+    display: flex;
+    flex-direction: column;
+    font-weight: 700;
+    line-height: var(--lh-tight);
+    text-shadow:
+      0 1px 2px rgba(28, 20, 14, 0.4),
+      0 2px 20px rgba(28, 20, 14, 0.55);
+    word-break: auto-phrase; // 日本語を文節で自然改行
+  }
+
+  .hero__title-lead {
+    font-size: clamp(20px, 3vw, 46px);
+  }
+
+  .hero__title-main {
+    font-size: clamp(36px, 6vw, 80px); // 貸切＝主役（SPでも1行で収まる）
+  }
+
+  .hero__title-sub {
+    margin-top: var(--space-2);
+    font-size: clamp(20px, 3vw, 46px);
+  }
+
+  .hero__sub {
+    max-width: 33em;
+    font-size: clamp(14px, 1.7vw, 20px);
+    line-height: var(--lh-loose);
+    text-shadow:
+      0 1px 2px rgba(28, 20, 14, 0.4),
+      0 1px 14px rgba(28, 20, 14, 0.6);
+    word-break: auto-phrase; // 日本語を文節で自然改行
+  }
+
+  .hero__cta {
+    width: 100%;
+    margin-top: var(--space-3);
+
+    @include tablet-up {
+      width: auto;
+      justify-content: flex-start;
+    }
+
+    // SPでボタン文字が大きすぎて折れるのを防ぐ
+    .c-btn {
+      min-height: clamp(52px, 6vw, 64px);
+      font-size: clamp(15px, 1.8vw, 22px);
+    }
+
+    // 電話ボタン文言：SPは短縮、tablet-up以上はフル（番号付き）
+    .hero__tel-full {
+      display: none;
+    }
+    .hero__tel-short {
+      display: inline;
+    }
+
+    @include tablet-up {
+      .hero__tel-full {
+        display: inline;
+      }
+      .hero__tel-short {
+        display: none;
+      }
+    }
+  }
+</style>

@@ -1,0 +1,147 @@
+---
+// ⑦ ＋αの使い方（休憩・体験スポット）
+// 貸切空間を体験・休憩の場としても提案。クリーム背景。湖畔の自然をいかしたアクティビティ
+---
+
+<section class="l-section l-section--cream plus-alpha" id="plus-alpha">
+  <div class="l-container">
+    <div class="c-head">
+      <h2 class="c-head__title">お昼だけじゃ、もったいない。</h2>
+      <p class="c-head__lead">
+        同じ貸切空間を、休憩や体験の場としてもお使いいただけます。お食事とあわせれば、一日たっぷり。
+      </p>
+    </div>
+
+    <ul class="plus-alpha__list">
+      <li class="plus-alpha__item c-card">
+        <figure class="c-figure plus-alpha__figure">
+          <img
+            src="/images/flyer/activity_1_molkky.png"
+            alt="モルック体験の様子"
+            loading="lazy"
+          />
+        </figure>
+        <h3 class="plus-alpha__title">モルック体験</h3>
+        <ul class="plus-alpha__tags">
+          <li><span class="c-tag">10〜100名</span></li>
+          <li><span class="c-tag">約2時間</span></li>
+          <li><span class="c-tag">雨天対応</span></li>
+        </ul>
+      </li>
+
+      <li class="plus-alpha__item c-card">
+        <figure class="c-figure plus-alpha__figure">
+          <img
+            src="/images/flyer/activity_2_kunimasu.png"
+            alt="クニマス学習の様子"
+            loading="lazy"
+          />
+        </figure>
+        <h3 class="plus-alpha__title">クニマス学習</h3>
+        <ul class="plus-alpha__tags">
+          <li><span class="c-tag">10〜200名</span></li>
+          <li><span class="c-tag">約2時間〜</span></li>
+          <li><span class="c-tag">雨天対応</span></li>
+        </ul>
+      </li>
+
+      <li class="plus-alpha__item c-card">
+        <figure class="c-figure plus-alpha__figure">
+          <img
+            src="/images/flyer/activity_3_jukai_trail.png"
+            alt="青木ヶ原 樹海トレイルの様子"
+            loading="lazy"
+          />
+        </figure>
+        <h3 class="plus-alpha__title">樹海トレイル</h3>
+        <ul class="plus-alpha__tags">
+          <li><span class="c-tag">青木ヶ原</span></li>
+          <li><span class="c-tag">10〜100名</span></li>
+          <li><span class="c-tag">約2〜2.5時間</span></li>
+          <li><span class="c-tag">雨天対応</span></li>
+        </ul>
+      </li>
+
+      <li class="plus-alpha__item plus-alpha__item--more">
+        <p class="plus-alpha__more-text">
+          そのほか、カヌー・SUPなどの水上アクティビティ、キャンプファイアも
+        </p>
+      </li>
+    </ul>
+
+    <p class="c-note plus-alpha__note">
+      レクリエーション大会（マイク・スピーカー貸出可）やチームビルディングにも。内容はお気軽にご相談ください。
+    </p>
+  </div>
+</section>
+
+<style lang="scss">
+  @import "../../styles/variables";
+  @import "../../styles/functions";
+  @import "../../styles/mixins";
+
+  .plus-alpha {
+    color: var(--main_color_1);
+  }
+
+  .plus-alpha__list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
+
+    @include tablet-up {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-4);
+    }
+
+    @include desktop-up {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .plus-alpha__item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .plus-alpha__figure {
+    aspect-ratio: 4 / 3;
+  }
+
+  .plus-alpha__title {
+    font-size: var(--fs-h3);
+    font-weight: 700;
+    line-height: var(--lh-tight);
+  }
+
+  .plus-alpha__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1);
+    margin-top: auto;
+  }
+
+  // そのほか：カード枠なし・西湖ブルーで自然/水ブロックを示す
+  .plus-alpha__item--more {
+    justify-content: center;
+    align-items: center;
+    padding: var(--space-4);
+    border-radius: var(--radius-card);
+    border: 2px dashed var(--blue_1);
+    background-color: transparent;
+  }
+
+  .plus-alpha__more-text {
+    font-size: var(--fs-body);
+    font-weight: 500;
+    line-height: var(--lh-loose);
+    text-align: center;
+    color: var(--blue_1);
+  }
+
+  .plus-alpha__note {
+    margin-top: var(--space-4);
+    text-align: center;
+  }
+</style>

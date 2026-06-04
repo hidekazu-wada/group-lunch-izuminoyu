@@ -1,0 +1,130 @@
+---
+// ⑥ お食事メニュー
+// 料理写真は未支給のため、写真部分は必ず c-ph プレースホルダを使う
+---
+
+<section class="l-section menu">
+  <div class="l-container">
+    <header class="c-head">
+      <h2 class="c-head__title">美しい湖を眺めて、みんなで同じ食卓を。</h2>
+    </header>
+
+    <ul class="menu__list">
+      <!-- 🔴 料理写真 未支給（差し替え） -->
+      <li class="menu__item c-card">
+        <div class="c-ph menu__ph">
+          <span class="c-ph__label">料理写真（準備中）</span>
+          <span class="c-ph__note">🔴 本番写真に差し替え</span>
+        </div>
+        <h3 class="menu__name">カレーライス</h3>
+        <p class="menu__desc">サラダ付き</p>
+        <p class="menu__price">
+          <span class="menu__price-num">1,100</span><span class="menu__price-unit">円</span><span class="menu__price-tax">（税込）</span>
+        </p>
+      </li>
+
+      <!-- 🔴 料理写真 未支給（差し替え） -->
+      <li class="menu__item c-card">
+        <div class="c-ph menu__ph">
+          <span class="c-ph__label">料理写真（準備中）</span>
+          <span class="c-ph__note">🔴 本番写真に差し替え</span>
+        </div>
+        <h3 class="menu__name">牛丼</h3>
+        <p class="menu__desc">サラダ付き</p>
+        <p class="menu__price">
+          <span class="menu__price-num">1,100</span><span class="menu__price-unit">円</span><span class="menu__price-tax">（税込）</span>
+        </p>
+      </li>
+
+      <!-- 🔴 料理写真 未支給（差し替え） -->
+      <li class="menu__item c-card">
+        <div class="c-ph menu__ph">
+          <span class="c-ph__label">料理写真（準備中）</span>
+          <span class="c-ph__note">🔴 本番写真に差し替え</span>
+        </div>
+        <h3 class="menu__name">ほうとう定食</h3>
+        <p class="menu__desc">ほうとう小鍋・唐揚げ・ご飯・漬物・甘味</p>
+        <p class="menu__price">
+          <span class="menu__price-num">1,400</span><span class="menu__price-unit">円</span><span class="menu__price-tax">（税込）</span>
+        </p>
+      </li>
+    </ul>
+
+    <div class="menu__notes">
+      <p class="c-note">※価格はお一人さま・税込。別途、貸切利用料 500円/名 を頂戴します。</p>
+      <!-- 🔴 原材料表PDFは⑩資料DLに設置（準備中） -->
+      <p class="c-note">※アレルギーに対応いたします。原材料表（メニュー／アレルギー対応）もご用意しています。</p>
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  @import "../../styles/variables";
+  @import "../../styles/functions";
+  @import "../../styles/mixins";
+
+  .menu__list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+
+    @include tablet-up {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .menu__item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-2);
+    color: var(--main_color_1);
+  }
+
+  .menu__ph {
+    margin-bottom: var(--space-1);
+  }
+
+  .menu__name {
+    font-size: var(--fs-h3);
+    font-weight: 700;
+    line-height: var(--lh-tight);
+  }
+
+  .menu__desc {
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+  }
+
+  .menu__price {
+    margin-top: auto;
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: var(--space-1);
+    font-weight: 700;
+    line-height: 1;
+    color: var(--main_color_1);
+  }
+
+  .menu__price-num {
+    font-size: var(--fs-display);
+  }
+
+  .menu__price-unit {
+    font-size: var(--fs-h3);
+  }
+
+  .menu__price-tax {
+    font-size: var(--fs-meta);
+    font-weight: 500;
+    opacity: 0.8;
+  }
+
+  .menu__notes {
+    margin-top: var(--space-5);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+</style>

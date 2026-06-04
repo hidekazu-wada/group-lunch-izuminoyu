@@ -1,0 +1,49 @@
+// =============================================================
+// Layout — レイアウトプリミティブ（l- prefix）
+// =============================================================
+
+// 中央寄せコンテナ
+.l-container {
+  width: 100%;
+  max-width: 1160px;
+  margin-inline: auto;
+  padding-inline: var(--space-3);
+
+  @include tablet-up {
+    padding-inline: var(--space-5);
+  }
+
+  &--narrow {
+    max-width: 880px;
+  }
+}
+
+// セクションの縦余白・背景バリエーション
+.l-section {
+  position: relative;
+  padding-block: var(--space-6);
+
+  @include tablet-up {
+    padding-block: var(--space-7);
+  }
+  @include desktop-up {
+    padding-block: var(--space-8);
+  }
+
+  // 明るいクリーム背景
+  &--cream {
+    background-color: var(--main_color_3);
+  }
+
+  // 西湖ブルー（リード・自然/水のブロック限定）
+  &--blue {
+    background-color: var(--blue_1);
+    color: var(--main_color_3);
+  }
+
+  // 茶ベタ
+  &--brown {
+    background-color: var(--surface-brown-solid);
+    color: var(--main_color_3);
+  }
+}

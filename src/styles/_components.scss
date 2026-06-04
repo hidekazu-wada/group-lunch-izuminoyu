@@ -1,0 +1,266 @@
+// =============================================================
+// Components — 全セクション共通のUI部品（c- prefix）
+// 各セクションはこれらを組み合わせて使う（gold=CTA/hover専用 / 角は丸く）
+// =============================================================
+
+// ---- セクション見出し --------------------------------------
+.c-head {
+  text-align: center;
+  margin-bottom: var(--space-5);
+
+  &__label {
+    display: inline-block;
+    font-size: var(--fs-meta);
+    letter-spacing: var(--ls-label);
+    font-weight: 500;
+    color: var(--main_color_1);
+    opacity: 0.8;
+    margin-bottom: var(--space-2);
+
+    // 西湖ブルー／茶背景では反転
+    .l-section--blue &,
+    .l-section--brown & {
+      color: var(--main_color_3);
+      opacity: 0.9;
+    }
+  }
+
+  &__title {
+    font-size: var(--fs-h2);
+    font-weight: 700;
+    line-height: var(--lh-tight);
+  }
+
+  &__lead {
+    margin-top: var(--space-3);
+    font-size: var(--fs-body);
+    line-height: var(--lh-loose);
+  }
+
+  &--left {
+    text-align: left;
+  }
+}
+
+// ---- ボタン -------------------------------------------------
+.c-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  width: 100%;
+  min-height: 64px;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-base);
+  font-weight: 700;
+  font-size: var(--fs-body);
+  line-height: var(--lh-tight);
+  text-align: center;
+  cursor: pointer;
+  transition:
+    transform var(--dur-base) var(--ease-soft),
+    box-shadow var(--dur-base) var(--ease-soft),
+    background-color var(--dur-base) var(--ease-soft),
+    color var(--dur-base) var(--ease-soft);
+
+  @include tablet-up {
+    width: auto;
+  }
+
+  &__icon {
+    width: 1.15em;
+    height: 1.15em;
+    flex-shrink: 0;
+  }
+
+  &__sub {
+    display: block;
+    font-size: var(--fs-meta);
+    font-weight: 500;
+  }
+
+  // 電話（主CV）：ゴールド＝CTAハイライト（サイト全体で電話を主CTAに統一）
+  &--tel {
+    background-color: var(--main_color_2);
+    color: var(--main_color_1);
+    box-shadow: var(--shadow-card);
+
+    @include hover {
+      &:hover {
+        background-color: var(--main_color_1);
+        color: var(--main_color_3);
+        transform: translateY(-2px);
+      }
+    }
+  }
+
+  // フォーム（従）：茶ベース → hoverでゴールド
+  &--form {
+    background-color: var(--main_color_1);
+    color: var(--main_color_3);
+    box-shadow: var(--shadow-soft);
+
+    @include hover {
+      &:hover {
+        background-color: var(--main_color_2);
+        color: var(--main_color_1);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-card);
+      }
+    }
+  }
+
+  // 枠線（PDF/サブ動線）
+  &--ghost {
+    background-color: transparent;
+    color: var(--main_color_1);
+    border: 2px solid currentColor;
+
+    @include hover {
+      &:hover {
+        background-color: var(--main_color_1);
+        color: var(--main_color_3);
+        border-color: var(--main_color_1);
+      }
+    }
+
+    // 反転背景では明色枠
+    .l-section--blue &,
+    .l-section--brown & {
+      color: var(--main_color_3);
+
+      @include hover {
+        &:hover {
+          background-color: var(--main_color_3);
+          color: var(--main_color_1);
+          border-color: var(--main_color_3);
+        }
+      }
+    }
+  }
+}
+
+// ---- CTAグループ（縦→横） -----------------------------------
+.c-cta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+
+  @include tablet-up {
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+
+  &--stack {
+    @include tablet-up {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+}
+
+// ---- カード -------------------------------------------------
+.c-card {
+  background-color: var(--white);
+  border-radius: var(--radius-card);
+  padding: var(--space-4);
+  box-shadow: var(--shadow-soft);
+}
+
+// ---- タグ／ピル ---------------------------------------------
+.c-tag {
+  display: inline-block;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-tag);
+  background-color: var(--main_color_3);
+  color: var(--main_color_1);
+  font-size: var(--fs-meta);
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+// ---- 注記 ---------------------------------------------------
+.c-note {
+  font-size: var(--fs-meta);
+  line-height: var(--lh-body);
+  color: var(--main_color_1);
+  opacity: 0.85;
+}
+
+// ---- 画像プレースホルダ（料理写真など 🔴 未支給） -----------
+.c-ph {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-card);
+  background-color: var(--main_color_3);
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 14px,
+    rgba(124, 99, 81, 0.06) 14px,
+    rgba(124, 99, 81, 0.06) 28px
+  );
+  color: var(--main_color_1);
+  text-align: center;
+
+  &__label {
+    font-weight: 700;
+    font-size: var(--fs-body);
+  }
+
+  &__note {
+    font-size: var(--fs-meta);
+    opacity: 0.7;
+  }
+}
+
+// ---- 写真フレーム（角丸・影） -------------------------------
+.c-figure {
+  margin: 0;
+  border-radius: var(--radius-card);
+  overflow: clip;
+  box-shadow: var(--shadow-soft);
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__cap {
+    display: block;
+    margin-top: var(--space-1);
+    font-size: var(--fs-meta);
+    opacity: 0.8;
+  }
+}
+
+// ---- ビジュアルに埋もれない強調数字 ------------------------
+.c-stat {
+  &__num {
+    font-size: var(--fs-display);
+    font-weight: 700;
+    line-height: 1;
+    color: var(--main_color_2);
+  }
+
+  &__unit {
+    font-size: var(--fs-h3);
+    font-weight: 700;
+  }
+
+  &__label {
+    display: block;
+    margin-top: var(--space-1);
+    font-size: var(--fs-meta);
+  }
+}

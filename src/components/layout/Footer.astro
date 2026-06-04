@@ -1,0 +1,62 @@
+---
+// ⑭ フッター
+import { SITE } from '../../consts';
+---
+
+<footer class="footer">
+  <div class="footer__inner l-container">
+    <p class="footer__name">HAMAYOUリゾート Wonder Child Park ／ 日帰り温泉 いずみの湯</p>
+    <p class="footer__addr">
+      <a class="no-link">〒{SITE.zip} {SITE.address}</a>
+      <span class="footer__sep" aria-hidden="true">｜</span>
+      <span class="footer__tel">
+        TEL <a href={SITE.telHref} data-ga-event="tel_tap" data-ga-label="footer">{SITE.tel}</a>
+      </span>
+    </p>
+    <p class="footer__company">{SITE.company}</p>
+  </div>
+</footer>
+
+<style lang="scss">
+  @import "../../styles/variables";
+  @import "../../styles/functions";
+  @import "../../styles/mixins";
+
+  .footer {
+    background-color: var(--surface-brown-solid);
+    color: var(--main_color_3);
+    padding-block: var(--space-5);
+    text-align: center;
+  }
+
+  .footer__inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .footer__name {
+    font-weight: 700;
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+  }
+
+  .footer__addr {
+    font-size: var(--fs-meta);
+    line-height: var(--lh-body);
+  }
+
+  .footer__sep {
+    margin-inline: var(--space-1);
+  }
+
+  .footer__tel a {
+    font-weight: 700;
+  }
+
+  .footer__company {
+    font-size: var(--fs-meta);
+    opacity: 0.85;
+    margin-top: var(--space-1);
+  }
+</style>

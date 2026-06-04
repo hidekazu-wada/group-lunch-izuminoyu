@@ -1,0 +1,93 @@
+---
+// ⑧ 温泉・お土産
+// 背景：西湖ブルー（自然・水のブロック）。文字はクリーム
+// SPは縦（画像→本文）／ desktop-up で 画像＋テキストの2カラム
+---
+
+<section class="l-section l-section--blue onsen" id="onsen">
+  <div class="l-container onsen__inner">
+    <figure class="c-figure onsen__figure">
+      <img
+        src="/images/flyer/facility_5_onsen_bath.png"
+        alt="併設の日帰り温泉 いずみの湯の浴場"
+        loading="lazy"
+      />
+    </figure>
+
+    <div class="onsen__body">
+      <div class="c-head c-head--left onsen__head">
+        <h2 class="c-head__title">食べたら、そのまま、ひとっ風呂。</h2>
+      </div>
+
+      <p class="onsen__text">
+        併設の日帰り温泉「いずみの湯」で、お食事のあとはそのまま入浴まで。移動なしで楽しめるのが、団体さまに喜ばれています。
+      </p>
+      <p class="onsen__text">
+        お土産の手配も可能です。旅の締めくくりまで、この一か所で。
+      </p>
+
+      <!-- 🔴 団体入浴料金・タオル 未確定（差し替え） -->
+      <p class="c-note onsen__note">
+        ※団体入浴料金・タオルのご用意については、確定しだいご案内します。
+      </p>
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  @import "../../styles/variables";
+  @import "../../styles/functions";
+  @import "../../styles/mixins";
+
+  .onsen__inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+
+    @include desktop-up {
+      flex-direction: row;
+      align-items: center;
+      gap: var(--space-6);
+    }
+  }
+
+  .onsen__figure {
+    width: 100%;
+
+    @include desktop-up {
+      flex: 1 1 0;
+      align-self: stretch;
+    }
+
+    img {
+      aspect-ratio: 4 / 3;
+    }
+  }
+
+  .onsen__body {
+    @include desktop-up {
+      flex: 1 1 0;
+    }
+  }
+
+  .onsen__head {
+    margin-bottom: var(--space-4);
+  }
+
+  .onsen__text {
+    font-size: var(--fs-body);
+    line-height: var(--lh-loose);
+    color: var(--main_color_3);
+
+    & + & {
+      margin-top: var(--space-3);
+    }
+  }
+
+  // 反転背景でも読めるよう、注記はクリーム文字で
+  .onsen__note {
+    margin-top: var(--space-4);
+    color: var(--main_color_3);
+    opacity: 0.85;
+  }
+</style>

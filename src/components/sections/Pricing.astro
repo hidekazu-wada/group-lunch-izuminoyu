@@ -1,0 +1,294 @@
+---
+// ⑨ ご利用案内・料金
+// 貸切利用料の料金表。SPはカード型、tablet-up以上はテーブル型に組み替える
+import { SITE } from '../../consts';
+---
+
+<section class="l-section l-section--cream pricing" id="pricing">
+  <div class="l-container">
+    <div class="c-head">
+      <p class="c-head__label">PRICE</p>
+      <h2 class="c-head__title">ご利用案内</h2>
+    </div>
+
+    <!-- 料金表（貸切利用料） -->
+    <div class="pricing__table" role="table" aria-label="貸切利用料">
+      <div class="pricing__row pricing__row--head" role="row">
+        <span class="pricing__cell pricing__cell--use" role="columnheader">ご利用</span>
+        <span class="pricing__cell pricing__cell--time" role="columnheader">滞在時間</span>
+        <span class="pricing__cell pricing__cell--price" role="columnheader">お一人さま</span>
+        <span class="pricing__cell pricing__cell--min" role="columnheader">最低保証</span>
+      </div>
+
+      <div class="pricing__row" role="row">
+        <span class="pricing__cell pricing__cell--use" role="cell">
+          <span class="pricing__label" aria-hidden="true">ご利用</span>休憩
+        </span>
+        <span class="pricing__cell pricing__cell--time" role="cell">
+          <span class="pricing__label" aria-hidden="true">滞在時間</span>2時間
+        </span>
+        <span class="pricing__cell pricing__cell--price" role="cell">
+          <span class="pricing__label" aria-hidden="true">お一人さま</span>800円
+        </span>
+        <span class="pricing__cell pricing__cell--min" role="cell">
+          <span class="pricing__label" aria-hidden="true">最低保証</span>30,000円
+        </span>
+      </div>
+
+      <div class="pricing__row pricing__row--featured" role="row">
+        <span class="pricing__badge">おすすめ</span>
+        <span class="pricing__cell pricing__cell--use" role="cell">
+          <span class="pricing__label" aria-hidden="true">ご利用</span>体験／お食事・ご入浴
+        </span>
+        <span class="pricing__cell pricing__cell--time" role="cell">
+          <span class="pricing__label" aria-hidden="true">滞在時間</span>2＋1時間
+        </span>
+        <span class="pricing__cell pricing__cell--price" role="cell">
+          <span class="pricing__label" aria-hidden="true">お一人さま</span><strong>500円</strong>
+        </span>
+        <span class="pricing__cell pricing__cell--min" role="cell">
+          <span class="pricing__label" aria-hidden="true">最低保証</span>30,000円
+        </span>
+      </div>
+
+      <div class="pricing__row" role="row">
+        <span class="pricing__cell pricing__cell--use" role="cell">
+          <span class="pricing__label" aria-hidden="true">ご利用</span>延長
+        </span>
+        <span class="pricing__cell pricing__cell--time" role="cell">
+          <span class="pricing__label" aria-hidden="true">滞在時間</span>1時間ごと
+        </span>
+        <span class="pricing__cell pricing__cell--price" role="cell">
+          <span class="pricing__label" aria-hidden="true">お一人さま</span>400円
+        </span>
+        <span class="pricing__cell pricing__cell--min" role="cell">
+          <span class="pricing__label" aria-hidden="true">最低保証</span>—
+        </span>
+      </div>
+    </div>
+
+    <!-- ポイント -->
+    <div class="pricing__point c-card">
+      <p class="pricing__point-text">
+        お食事・ご入浴をご利用の場合は、貸切利用料がお一人さま500円に。滞在時間も1時間延長してゆっくりお過ごしいただけます。
+      </p>
+      <p class="pricing__point-text pricing__point-text--ex">
+        （例：カレーライスご利用 1,100円＋貸切利用料500円＝<strong>お一人さま1,600円・税込</strong>）
+      </p>
+    </div>
+
+    <!-- ご利用条件 -->
+    <div class="pricing__terms">
+      <h3 class="pricing__terms-title">ご利用条件</h3>
+      <ul class="pricing__terms-list">
+        <li class="pricing__terms-item">
+          団体予約制（事前のお問い合わせをお願いします）
+        </li>
+        <!-- 🔴 人数下限/提供時間帯/営業日 未確定（ダミー） -->
+        <li class="pricing__terms-item">
+          ご利用人数の目安：{SITE.capacityMin}名〜{SITE.capacityMax}名／提供時間帯：{SITE.openHours}／営業日：{SITE.openDays}
+        </li>
+        <li class="pricing__terms-item">
+          貸切利用・お土産の手配は、事前のご予約が必要です
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  @import "../../styles/variables";
+  @import "../../styles/functions";
+  @import "../../styles/mixins";
+
+  // ---- 料金表（SP＝カード型 / tablet-up＝テーブル型） ----------
+  .pricing__table {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  // SPでは見出し行を隠す（各カード内にラベルを出す）
+  .pricing__row--head {
+    display: none;
+  }
+
+  .pricing__row {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    padding: var(--space-4);
+    border-radius: var(--radius-card);
+    background-color: var(--white);
+    box-shadow: var(--shadow-soft);
+  }
+
+  // おすすめ行のハイライト
+  .pricing__row--featured {
+    background-color: var(--main_color_3);
+    box-shadow: var(--shadow-card);
+    border: 2px solid var(--main_color_2);
+  }
+
+  .pricing__badge {
+    position: absolute;
+    top: 0;
+    right: var(--space-3);
+    transform: translateY(-50%);
+    padding: var(--space-1) var(--space-3);
+    border-radius: var(--radius-pill);
+    background-color: var(--main_color_2);
+    color: var(--main_color_1);
+    font-size: var(--fs-meta);
+    font-weight: 700;
+    line-height: 1.4;
+    white-space: nowrap;
+  }
+
+  .pricing__cell {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--space-2);
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+    color: var(--main_color_1);
+  }
+
+  // SPカード内の項目ラベル
+  .pricing__label {
+    flex-shrink: 0;
+    min-width: 7em;
+    font-size: var(--fs-meta);
+    font-weight: 500;
+    opacity: 0.7;
+  }
+
+  // 価格セルは数字を少し強調（おすすめ行の500円はstrong）
+  .pricing__cell--price {
+    font-weight: 700;
+  }
+
+  // ---- tablet-up：テーブル組み（4カラム） ---------------------
+  @include tablet-up {
+    .pricing__table {
+      gap: 0;
+      border-radius: var(--radius-card);
+      overflow: clip; // 角丸内に行をクリップ
+      box-shadow: var(--shadow-soft);
+    }
+
+    .pricing__row {
+      flex-direction: row;
+      align-items: center;
+      gap: var(--space-4);
+      padding: var(--space-4) var(--space-5);
+      border-radius: 0;
+      box-shadow: none;
+      border-bottom: 1px solid rgba(124, 99, 81, 0.12);
+    }
+
+    .pricing__row--head {
+      display: flex;
+      background-color: var(--main_color_1);
+
+      .pricing__cell {
+        font-size: var(--fs-meta);
+        font-weight: 700;
+        color: var(--main_color_3);
+      }
+    }
+
+    .pricing__row:last-child {
+      border-bottom: none;
+    }
+
+    .pricing__row--featured {
+      border: none;
+      box-shadow: inset 0 0 0 2px var(--main_color_2);
+    }
+
+    .pricing__badge {
+      top: 50%;
+      right: var(--space-4);
+      transform: translateY(-50%);
+    }
+
+    // テーブル時はカード内ラベルを隠す
+    .pricing__label {
+      display: none;
+    }
+
+    .pricing__cell {
+      flex: 1 1 0;
+    }
+
+    .pricing__cell--use {
+      flex: 1.6 1 0;
+    }
+  }
+
+  @include desktop-up {
+    .pricing__row {
+      padding: var(--space-4) var(--space-6);
+    }
+  }
+
+  // ---- ポイント（おすすめ訴求カード） -------------------------
+  .pricing__point {
+    margin-top: var(--space-5);
+  }
+
+  .pricing__point-text {
+    font-size: var(--fs-body);
+    line-height: var(--lh-loose);
+    color: var(--main_color_1);
+
+    & + & {
+      margin-top: var(--space-2);
+    }
+  }
+
+  .pricing__point-text--ex {
+    color: var(--blue_1);
+  }
+
+  // ---- ご利用条件 --------------------------------------------
+  .pricing__terms {
+    margin-top: var(--space-5);
+  }
+
+  .pricing__terms-title {
+    font-size: var(--fs-h3);
+    font-weight: 700;
+    line-height: var(--lh-tight);
+    color: var(--main_color_1);
+    margin-bottom: var(--space-3);
+  }
+
+  .pricing__terms-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .pricing__terms-item {
+    position: relative;
+    padding-left: var(--space-4);
+    font-size: var(--fs-body);
+    line-height: var(--lh-loose);
+    color: var(--main_color_1);
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0.7em;
+      left: 0;
+      width: 0.5em;
+      height: 0.5em;
+      border-radius: var(--radius-pill);
+      background-color: var(--main_color_2);
+    }
+  }
+</style>

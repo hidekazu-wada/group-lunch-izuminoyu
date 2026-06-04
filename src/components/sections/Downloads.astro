@@ -1,0 +1,58 @@
+---
+// ⑩ 資料ダウンロード
+// 原材料表・アレルギー対応表（PDF）。手配前の確認用。
+// 🔴 原材料表PDF・アレルギー対応表PDF 未用意（差し替え）
+import { SITE } from '../../consts';
+---
+
+<section class="l-section" id="downloads">
+  <div class="l-container l-container--narrow">
+    <div class="c-head">
+      <h2 class="c-head__title">原材料表・アレルギー対応表</h2>
+      <p class="c-head__lead">
+        お食事の原材料表と、アレルギー対応の一覧をご用意しています。手配前のご確認にどうぞ。
+      </p>
+    </div>
+
+    <!-- 🔴 原材料表PDF・アレルギー対応表PDF 未用意（差し替え） -->
+    <div class="downloads__cta c-cta">
+      <a
+        class="c-btn c-btn--ghost"
+        href={SITE.ingredientsPdf}
+        data-ga-event="pdf_download"
+        data-ga-label="ingredients"
+        target="_blank"
+        rel="noopener"
+      >
+        団体食事メニュー 原材料表（PDF）
+      </a>
+      <a
+        class="c-btn c-btn--ghost"
+        href={SITE.allergyPdf}
+        data-ga-event="pdf_download"
+        data-ga-label="allergy"
+        target="_blank"
+        rel="noopener"
+      >
+        アレルギー対応 原材料表（PDF）
+      </a>
+    </div>
+
+    <p class="downloads__note c-note">※PDFは準備中です。</p>
+  </div>
+</section>
+
+<style lang="scss">
+  @import "../../styles/variables";
+  @import "../../styles/functions";
+  @import "../../styles/mixins";
+
+  .downloads__cta {
+    margin-top: var(--space-5);
+  }
+
+  .downloads__note {
+    margin-top: var(--space-3);
+    text-align: center;
+  }
+</style>

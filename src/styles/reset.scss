@@ -48,54 +48,15 @@ html {
  */
 body {
     margin: 0;
-    width: 100vw;
-    overflow-x: hidden;
-    background-color: #f0f0f0;
-    background-image: var(--bg-mobile-fallback), var(--bg-mobile);
-    background-attachment: scroll;
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    font-family: "Noto Sans JP", sans-serif;
-    font-weight: 500;
-    color: #231f20;
-}
-@media (min-width: 768px) {
-    body {
-        background-image: var(--bg-desktop-fallback), var(--bg-desktop);
-        background-attachment: fixed;
-    }
-}
-body.is-loading {
-    visibility: hidden;
-    opacity: 0;
-    -webkit-transition: none;
-    transition: none;
-}
-body.is-loaded {
-    visibility: visible;
-    opacity: 1;
-    -webkit-transition: opacity 0.3s ease-in;
-    transition: opacity 0.3s ease-in;
 }
 
 /**
  * Render the `main` element consistently in IE.
- * Add padding-top to account for fixed header.
+ * （本LPは固定ヘッダーを持たないため padding-top は付与しない。
+ *   基本タイポ・背景は _base.scss で定義）
  */
 main {
     display: block;
-    padding-top: 16.667vw;
-}
-@media (min-width: 768px) {
-    main {
-        padding-top: 7vw;
-    }
-}
-@media (min-width: 1024px) {
-    main {
-        padding-top: 5.469vw;
-    }
 }
 
 /* Vertical rhythm */

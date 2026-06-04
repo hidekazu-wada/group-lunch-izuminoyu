@@ -1,0 +1,140 @@
+---
+// ② 希少性（つかみ）
+// 「団体が一度に入れる場所」探しの不便さに共感 → いずみの湯なら貸切で受けられる、と数字で約束
+import { SITE } from '../../consts';
+---
+
+<section class="scarcity l-section l-section--cream" id="scarcity">
+  <div class="l-container">
+    <div class="c-head c-head--left scarcity__head">
+      <h2 class="c-head__title">
+        いま、河口湖周辺で「団体が一度に入れる場所」を探していませんか。
+      </h2>
+    </div>
+
+    <div class="scarcity__body">
+      <div class="scarcity__text">
+        <p class="scarcity__lead">
+          観光のにぎわいが戻り、まとまった人数で食事できる場所は年々見つけにくくなっています。
+        </p>
+        <p class="scarcity__lead">
+          いずみの湯（HAMAYOUリゾート Wonder Child Park）なら、最大1,800㎡の貸切サイトと併設の温泉で、<strong>数十名から{SITE.capacityMax}名規模まで、ひと組貸切</strong>でお迎えします。
+        </p>
+      </div>
+
+      <ul class="scarcity__stats">
+        <li class="scarcity__stat c-stat">
+          <p class="scarcity__stat-value">
+            <span class="c-stat__num">{SITE.capacityMax}</span><span class="c-stat__unit">名</span>
+          </p>
+          <span class="c-stat__label">完全貸切でお迎え</span>
+        </li>
+        <li class="scarcity__stat c-stat">
+          <p class="scarcity__stat-value">
+            <span class="c-stat__num">{SITE.siteAreaSqm.toLocaleString()}</span><span class="c-stat__unit">㎡</span>
+          </p>
+          <span class="c-stat__label">最大の貸切サイト</span>
+        </li>
+      </ul>
+    </div>
+
+    <figure class="scarcity__figure c-figure">
+      <img
+        src="/images/flyer/facility_3_group_lakeside.png"
+        alt="西湖の湖畔にひろがる貸切サイトの様子"
+        loading="lazy"
+      />
+    </figure>
+  </div>
+</section>
+
+<style lang="scss">
+  @import "../../styles/variables";
+  @import "../../styles/functions";
+  @import "../../styles/mixins";
+
+  .scarcity {
+    color: var(--main_color_1);
+  }
+
+  .scarcity__head {
+    margin-bottom: var(--space-5);
+  }
+
+  // 本文＋数字：SPは縦積み、tablet-up以上で横並び
+  .scarcity__body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+
+    @include tablet-up {
+      flex-direction: row;
+      align-items: center;
+      gap: var(--space-6);
+    }
+  }
+
+  .scarcity__text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+
+    @include tablet-up {
+      flex: 1 1 0;
+    }
+  }
+
+  .scarcity__lead {
+    font-size: var(--fs-body);
+    line-height: var(--lh-loose);
+
+    strong {
+      font-weight: 700;
+    }
+  }
+
+  // 数字＝視覚的主役。SPでも横2カラムで存在感を出す
+  .scarcity__stats {
+    display: flex;
+    gap: var(--space-4);
+
+    @include tablet-up {
+      flex: 0 0 auto;
+      gap: var(--space-5);
+    }
+  }
+
+  .scarcity__stat {
+    flex: 1 1 0;
+    text-align: center;
+
+    @include tablet-up {
+      flex: 0 0 auto;
+    }
+  }
+
+  .scarcity__stat-value {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: var(--space-1);
+  }
+
+  // SPは2カラムに収めるため数字をやや抑える（tablet-up以上で本来の大きさへ）
+  .scarcity__stat .c-stat__num {
+    font-size: var(--fs-h2);
+
+    @include tablet-up {
+      font-size: var(--fs-display);
+    }
+  }
+
+  .scarcity__figure {
+    margin-top: var(--space-6);
+    aspect-ratio: 16 / 9;
+
+    @include tablet-up {
+      margin-top: var(--space-7);
+    }
+  }
+</style>

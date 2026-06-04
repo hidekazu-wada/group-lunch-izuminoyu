@@ -1,0 +1,143 @@
+---
+// ⑫ よくある質問（FAQ）
+// JSなしのアコーディオン（details/summary）。開閉アイコンはCSS擬似要素で＋/−
+import { SITE } from '../../consts';
+---
+
+<section class="l-section faq" id="faq">
+  <div class="l-container l-container--narrow">
+    <div class="c-head">
+      <h2 class="c-head__title">よくある質問</h2>
+    </div>
+
+    <div class="faq__list">
+      <!-- 🔴 人数下限 未確定（ダミー） -->
+      <details class="faq__item">
+        <summary class="faq__q">Q.何名から利用できますか？</summary>
+        <div class="faq__a">
+          A.{SITE.capacityMin}名から承ります。最大{SITE.capacityMax}名まで貸切でお迎えできます。
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary class="faq__q">Q.大型バスは停められますか？</summary>
+        <div class="faq__a">
+          A.大型バス6台まで駐車可能（駐車料込み）です。
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary class="faq__q">Q.雨が降っても大丈夫ですか？</summary>
+        <div class="faq__a">
+          A.約100畳の屋内休憩「ゆのわ堂」をご利用いただけます。
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary class="faq__q">Q.アレルギーに対応できますか？</summary>
+        <div class="faq__a">
+          A.対応いたします。原材料表もご用意しています。
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary class="faq__q">Q.食事のあとに温泉も入れますか？</summary>
+        <div class="faq__a">
+          A.併設「いずみの湯」でそのままご入浴いただけます。
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary class="faq__q">Q.予約はいつまでに？</summary>
+        <div class="faq__a">
+          A.団体予約制です。お早めにお問い合わせください（貸切・お土産手配は事前予約制）。
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  @import "../../styles/variables";
+  @import "../../styles/functions";
+  @import "../../styles/mixins";
+
+  .faq__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  // ---- 1問1答カード（角丸・影） ----
+  .faq__item {
+    border-radius: var(--radius-card);
+    background-color: var(--white);
+    box-shadow: var(--shadow-soft);
+    overflow: clip; // 角丸からの内部はみ出しを抑制
+    transition: box-shadow var(--dur-base) var(--ease-soft);
+
+    &[open] {
+      box-shadow: var(--shadow-card);
+    }
+  }
+
+  // ---- 質問（クリック領域＝summary） ----
+  .faq__q {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-6) var(--space-3) var(--space-3);
+    font-size: var(--fs-h3);
+    font-weight: 700;
+    line-height: var(--lh-body);
+    color: var(--main_color_1);
+    cursor: pointer;
+    list-style: none; // デフォルトの三角マーカーを消す
+    transition: color var(--dur-base) var(--ease-soft);
+
+    // Safari/Chrome のマーカー除去
+    &::-webkit-details-marker {
+      display: none;
+    }
+
+    @include hover {
+      &:hover {
+        color: var(--main_color_2);
+      }
+    }
+
+    // ＋／− 開閉アイコン（CSS擬似要素）
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: var(--space-3);
+      width: 1em;
+      height: 1em;
+      flex-shrink: 0;
+      // 横棒＋縦棒の十字（＝＋）。openで縦棒を消して−にする
+      background-image:
+        linear-gradient(currentColor, currentColor),
+        linear-gradient(currentColor, currentColor);
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: 100% 2px, 2px 100%;
+      transform: translateY(-50%);
+      transition: transform var(--dur-base) var(--ease-soft);
+    }
+  }
+
+  .faq__item[open] .faq__q::after {
+    background-size: 100% 2px, 2px 0; // 縦棒を消して − に
+    transform: translateY(-50%) rotate(180deg);
+  }
+
+  // ---- 回答 ----
+  .faq__a {
+    padding: 0 var(--space-3) var(--space-3);
+    font-size: var(--fs-body);
+    line-height: var(--lh-loose);
+    color: var(--main_color_1);
+  }
+</style>
