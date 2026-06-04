@@ -261,15 +261,17 @@ const pains = [
 
   .scarcity__stats-list {
     display: flex;
-    gap: var(--space-4);
+    flex-direction: column; // SPは縦積み（横並びは幅に収まらないため）
+    gap: var(--space-3);
 
     @include tablet-up {
+      flex-direction: row;
+      justify-content: center;
       gap: var(--space-6);
     }
   }
 
   .scarcity__stat {
-    flex: 1 1 0;
     text-align: center;
 
     @include tablet-up {
@@ -281,7 +283,7 @@ const pains = [
     display: flex;
     align-items: baseline;
     justify-content: center;
-    gap: var(--space-1);
+    white-space: nowrap; // 「最大250名」を1行に保つ（SPで折れないように）
   }
 
   // 「最大」など数字の前置き（小さめ）
