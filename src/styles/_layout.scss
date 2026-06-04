@@ -35,6 +35,11 @@
     background-color: var(--main_color_3);
   }
 
+  // 落ち着いたグレー（ネガティブ/痛み系セクション）
+  &--muted {
+    background-color: var(--surface-muted);
+  }
+
   // 西湖ブルー（リード・自然/水のブロック限定）
   &--blue {
     background-color: var(--blue_1);

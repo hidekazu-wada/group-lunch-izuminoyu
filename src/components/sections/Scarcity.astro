@@ -1,50 +1,93 @@
 ---
-// ② 希少性（つかみ）
-// 「団体が一度に入れる場所」探しの不便さに共感 → いずみの湯なら貸切で受けられる、と数字で約束
-import { SITE } from '../../consts';
+// ② 希少性（つかみ）— PAS：手配者の痛みに共感 → いずみの湯ならまるごと解決
+import { SITE } from "../../consts";
+
+// 手配者の“段取り”の痛み（共感）
+const pains = [
+  "大人数が一度に入れる店が、なかなか見つからない",
+  "バスの駐車に困り、何度も動かす手間と費用がかさむ",
+  "乗り降りのたびに時間を取られ、行程が押してしまう",
+  "繁忙期は混雑で、予期せぬトラブルにも気を張りっぱなし",
+];
 ---
 
-<section class="scarcity l-section l-section--cream" id="scarcity">
+<section class="scarcity l-section l-section--muted" id="scarcity">
   <div class="l-container">
-    <div class="c-head c-head--left scarcity__head">
+    <header class="c-head c-head--left scarcity__head">
       <h2 class="c-head__title">
-        いま、河口湖周辺で「団体が一度に入れる場所」を探していませんか。
+        団体昼食、立ち寄りの段取りに気を張っていませんか？
       </h2>
-    </div>
+      <p class="c-head__lead">
+        インバウンド需要が高まり、訪日観光客が増える影響で、まとまった人数が一度に入れる場所は年々見つけにくくなっています。場所探しだけでなく、当日の段取りにも気を遣うのが団体の手配です。
+      </p>
+    </header>
 
-    <div class="scarcity__body">
-      <div class="scarcity__text">
-        <p class="scarcity__lead">
-          観光のにぎわいが戻り、まとまった人数で食事できる場所は年々見つけにくくなっています。
-        </p>
-        <p class="scarcity__lead">
-          いずみの湯（HAMAYOUリゾート Wonder Child Park）なら、最大1,800㎡の貸切サイトと併設の温泉で、<strong>数十名から{SITE.capacityMax}名規模まで、ひと組貸切</strong>でお迎えします。
-        </p>
-      </div>
-
-      <ul class="scarcity__stats">
-        <li class="scarcity__stat c-stat">
-          <p class="scarcity__stat-value">
-            <span class="c-stat__num">{SITE.capacityMax}</span><span class="c-stat__unit">名</span>
-          </p>
-          <span class="c-stat__label">完全貸切でお迎え</span>
-        </li>
-        <li class="scarcity__stat c-stat">
-          <p class="scarcity__stat-value">
-            <span class="c-stat__num">{SITE.siteAreaSqm.toLocaleString()}</span><span class="c-stat__unit">㎡</span>
-          </p>
-          <span class="c-stat__label">最大の貸切サイト</span>
-        </li>
+    <div class="scarcity__main">
+      <!-- 痛みリスト（共感） -->
+      <ul class="scarcity__pains">
+        {
+          pains.map((p) => (
+            <li class="scarcity__pain">
+              <span class="scarcity__pain-mark" aria-hidden="true" />
+              <span class="scarcity__pain-text">{p}</span>
+            </li>
+          ))
+        }
       </ul>
+
+      <!-- 対比：混雑する観光地 → ひと組貸切の自社サイト -->
+      <div class="scarcity__contrast">
+        <figure class="scarcity__shot scarcity__shot--pain">
+          <img
+            src="/images/scarcity/crowd_busy.png"
+            alt="繁忙期に混雑する観光地の駐車場と人混み（イメージ）"
+            loading="lazy"
+          />
+          <figcaption class="scarcity__cap scarcity__cap--pain">繁忙期は、どこも混雑</figcaption>
+        </figure>
+
+        <span class="scarcity__arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M13 6l6 6-6 6" />
+          </svg>
+        </span>
+
+        <figure class="scarcity__shot scarcity__shot--relief">
+          <img
+            src="/images/scarcity/private_lakeside.png"
+            alt="西湖畔の貸切サイトに、ゆったり停まる大型バス"
+            loading="lazy"
+          />
+          <figcaption class="scarcity__cap scarcity__cap--relief">貸切でノンストレス</figcaption>
+        </figure>
+      </div>
     </div>
 
-    <figure class="scarcity__figure c-figure">
-      <img
-        src="/images/flyer/facility_3_group_lakeside.png"
-        alt="西湖の湖畔にひろがる貸切サイトの様子"
-        loading="lazy"
-      />
-    </figure>
+    <!-- 転換＋リリーフ -->
+    <div class="scarcity__relief">
+      <p class="scarcity__relief-head">その段取りの悩み、いずみの湯が解決。</p>
+      <p class="scarcity__relief-text">
+        食事・温泉・お土産・休憩まで“この一か所”で完結。大型バス6台はそのまま停めて（駐車料込み）、乗り換えも移動もなし。数十名から250名規模まで、ひと組貸切で、自分たちのペースで。
+      </p>
+
+      <div class="scarcity__stats">
+        <p class="scarcity__stats-note">他ではなかなか難しい規模を、ここで。</p>
+        <ul class="scarcity__stats-list">
+          <li class="scarcity__stat">
+            <span class="scarcity__stat-value">
+              <span class="scarcity__stat-pre">最大</span><span class="scarcity__stat-num">{SITE.capacityMax}</span><span class="scarcity__stat-unit">名</span>
+            </span>
+            <span class="scarcity__stat-label">完全貸切でお迎え</span>
+          </li>
+          <li class="scarcity__stat">
+            <span class="scarcity__stat-value">
+              <span class="scarcity__stat-num">{SITE.siteAreaSqm.toLocaleString()}</span><span class="scarcity__stat-unit">㎡</span>
+            </span>
+            <span class="scarcity__stat-label">貸切サイト</span>
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -61,46 +104,167 @@ import { SITE } from '../../consts';
     margin-bottom: var(--space-5);
   }
 
-  // 本文＋数字：SPは縦積み、tablet-up以上で横並び
-  .scarcity__body {
+  // 痛み＋対比：SP縦積み、desktopで2カラム
+  .scarcity__main {
     display: flex;
     flex-direction: column;
     gap: var(--space-5);
 
-    @include tablet-up {
+    @include desktop-up {
       flex-direction: row;
       align-items: center;
       gap: var(--space-6);
+
+      > * {
+        flex: 1 1 0;
+        min-width: 0;
+      }
     }
   }
 
-  .scarcity__text {
+  // ---- 痛みリスト ----
+  .scarcity__pains {
     display: flex;
     flex-direction: column;
-    gap: var(--space-3);
+    gap: var(--space-2);
+  }
+
+  .scarcity__pain {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-3);
+    background-color: var(--white);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-soft);
+    font-size: clamp(14px, 1.7vw, 21px);
+    line-height: var(--lh-body);
+  }
+
+  // 注意ドット（赤）＝“気がかり”の印
+  .scarcity__pain-mark {
+    flex-shrink: 0;
+    width: 0.7em;
+    height: 0.7em;
+    margin-top: 0.55em;
+    border-radius: var(--radius-pill);
+    background-color: var(--accent-red);
+  }
+
+  // ---- 対比イメージ ----
+  .scarcity__contrast {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
 
     @include tablet-up {
-      flex: 1 1 0;
+      flex-direction: row;
+      justify-content: center;
     }
   }
 
-  .scarcity__lead {
-    font-size: var(--fs-body);
+  .scarcity__shot {
+    margin: 0;
+    width: 100%;
+    border-radius: var(--radius-card);
+    overflow: clip;
+    box-shadow: var(--shadow-soft);
+    background-color: var(--white);
+
+    img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+    }
+  }
+
+  .scarcity__ph {
+    border-radius: 0; // 親(scarcity__shot)で角丸＋clip
+  }
+
+  .scarcity__cap {
+    display: block;
+    padding: var(--space-1) var(--space-2);
+    font-size: clamp(12px, 1.4vw, 16px);
+    font-weight: 700;
+    text-align: center;
+    white-space: nowrap; // 1行に収める
+  }
+
+  .scarcity__cap--pain {
+    color: var(--accent-red);
+  }
+
+  .scarcity__cap--relief {
+    color: var(--blue_1);
+  }
+
+  // 矢印：SPは下向き、tablet-upで右向き
+  .scarcity__arrow {
+    width: clamp(28px, 4vw, 44px);
+    height: clamp(28px, 4vw, 44px);
+    flex-shrink: 0;
+    color: var(--main_color_1);
+    transform: rotate(90deg);
+
+    @include tablet-up {
+      transform: none;
+    }
+
+    svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  // ---- 転換＋リリーフ ----
+  .scarcity__relief {
+    margin-top: var(--space-6);
+    padding: var(--space-4);
+    background-color: var(--white);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+
+    @include tablet-up {
+      padding: var(--space-5);
+    }
+  }
+
+  .scarcity__relief-head {
+    font-size: clamp(20px, 2.6vw, 36px);
+    font-weight: 700;
+    line-height: var(--lh-tight);
+    margin-bottom: var(--space-3);
+  }
+
+  .scarcity__relief-text {
+    font-size: clamp(14px, 1.7vw, 20px);
     line-height: var(--lh-loose);
-
-    strong {
-      font-weight: 700;
-    }
   }
 
-  // 数字＝視覚的主役。SPでも横2カラムで存在感を出す
+  // ---- 数字（対比で希少性） ----
   .scarcity__stats {
+    margin-top: var(--space-4);
+    padding-top: var(--space-4);
+    border-top: 1px solid rgba(124, 99, 81, 0.15);
+  }
+
+  .scarcity__stats-note {
+    font-size: clamp(13px, 1.5vw, 18px);
+    font-weight: 500;
+    opacity: 0.85;
+    margin-bottom: var(--space-2);
+  }
+
+  .scarcity__stats-list {
     display: flex;
     gap: var(--space-4);
 
     @include tablet-up {
-      flex: 0 0 auto;
-      gap: var(--space-5);
+      gap: var(--space-6);
     }
   }
 
@@ -120,21 +284,28 @@ import { SITE } from '../../consts';
     gap: var(--space-1);
   }
 
-  // SPは2カラムに収めるため数字をやや抑える（tablet-up以上で本来の大きさへ）
-  .scarcity__stat .c-stat__num {
-    font-size: var(--fs-h2);
-
-    @include tablet-up {
-      font-size: var(--fs-display);
-    }
+  // 「最大」など数字の前置き（小さめ）
+  .scarcity__stat-pre {
+    font-size: clamp(13px, 1.6vw, 22px);
+    font-weight: 700;
+    margin-right: 0.15em;
   }
 
-  .scarcity__figure {
-    margin-top: var(--space-6);
-    aspect-ratio: 16 / 9;
+  .scarcity__stat-num {
+    font-size: clamp(40px, 6vw, 75px);
+    font-weight: 700;
+    line-height: 1;
+    color: var(--main_color_2); // 数字アクセント
+  }
 
-    @include tablet-up {
-      margin-top: var(--space-7);
-    }
+  .scarcity__stat-unit {
+    font-size: clamp(20px, 2.5vw, 32px);
+    font-weight: 700;
+  }
+
+  .scarcity__stat-label {
+    display: block;
+    margin-top: var(--space-1);
+    font-size: clamp(12px, 1.4vw, 18px);
   }
 </style>
