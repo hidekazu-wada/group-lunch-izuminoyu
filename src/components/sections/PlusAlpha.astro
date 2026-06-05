@@ -1,6 +1,22 @@
 ---
-// ⑦ ＋αの使い方（休憩・体験スポット）
-// 貸切空間を体験・休憩の場としても提案。クリーム背景。湖畔の自然をいかしたアクティビティ
+// ⑦ ＋αの使い方（休憩・体験スポット）— 昼食＋αで一日たっぷり。体験イラストは生成予定（今はプレースホルダ）
+const activities = [
+  {
+    img: "/images/activities/molkky.png",
+    name: "モルック体験",
+    tags: ["10〜100名", "約2時間", "雨天対応"],
+  },
+  {
+    img: "/images/activities/kunimasu.png",
+    name: "クニマス学習",
+    tags: ["10〜200名", "約2時間〜", "雨天対応"],
+  },
+  {
+    img: "/images/activities/jukai.png",
+    name: "樹海トレイル",
+    tags: ["青木ヶ原", "10〜100名", "約2〜2.5時間", "雨天対応"],
+  },
+];
 ---
 
 <section class="l-section l-section--cream plus-alpha" id="plus-alpha">
@@ -13,63 +29,39 @@
     </div>
 
     <ul class="plus-alpha__list">
-      <li class="plus-alpha__item c-card">
-        <figure class="c-figure plus-alpha__figure">
-          <img
-            src="/images/flyer/activity_1_molkky.png"
-            alt="モルック体験の様子"
-            loading="lazy"
-          />
-        </figure>
-        <h3 class="plus-alpha__title">モルック体験</h3>
-        <ul class="plus-alpha__tags">
-          <li><span class="c-tag">10〜100名</span></li>
-          <li><span class="c-tag">約2時間</span></li>
-          <li><span class="c-tag">雨天対応</span></li>
-        </ul>
-      </li>
-
-      <li class="plus-alpha__item c-card">
-        <figure class="c-figure plus-alpha__figure">
-          <img
-            src="/images/flyer/activity_2_kunimasu.png"
-            alt="クニマス学習の様子"
-            loading="lazy"
-          />
-        </figure>
-        <h3 class="plus-alpha__title">クニマス学習</h3>
-        <ul class="plus-alpha__tags">
-          <li><span class="c-tag">10〜200名</span></li>
-          <li><span class="c-tag">約2時間〜</span></li>
-          <li><span class="c-tag">雨天対応</span></li>
-        </ul>
-      </li>
-
-      <li class="plus-alpha__item c-card">
-        <figure class="c-figure plus-alpha__figure">
-          <img
-            src="/images/flyer/activity_3_jukai_trail.png"
-            alt="青木ヶ原 樹海トレイルの様子"
-            loading="lazy"
-          />
-        </figure>
-        <h3 class="plus-alpha__title">樹海トレイル</h3>
-        <ul class="plus-alpha__tags">
-          <li><span class="c-tag">青木ヶ原</span></li>
-          <li><span class="c-tag">10〜100名</span></li>
-          <li><span class="c-tag">約2〜2.5時間</span></li>
-          <li><span class="c-tag">雨天対応</span></li>
-        </ul>
-      </li>
-
-      <li class="plus-alpha__item plus-alpha__item--more">
-        <p class="plus-alpha__more-text">
-          そのほか、カヌー・SUPなどの水上アクティビティ、キャンプファイアも
-        </p>
-      </li>
+      {
+        activities.map((a) => (
+          <li class="plus-alpha__item c-card">
+            <figure class="plus-alpha__shot">
+              <img
+                class="plus-alpha__img"
+                src={a.img}
+                alt={`${a.name}の様子`}
+                width="1536"
+                height="1024"
+                loading="lazy"
+              />
+            </figure>
+            <h3 class="plus-alpha__title">{a.name}</h3>
+            <ul class="plus-alpha__tags">
+              {a.tags.map((t) => (
+                <li>
+                  <span class="c-tag">{t}</span>
+                </li>
+              ))}
+            </ul>
+          </li>
+        ))
+      }
     </ul>
 
-    <p class="c-note plus-alpha__note">
+    <div class="plus-alpha__more">
+      <p class="plus-alpha__more-text">
+        そのほか、カヌー・SUPなどの水上アクティビティ、キャンプファイアも。
+      </p>
+    </div>
+
+    <p class="plus-alpha__note c-note">
       レクリエーション大会（マイク・スピーカー貸出可）やチームビルディングにも。内容はお気軽にご相談ください。
     </p>
   </div>
@@ -90,23 +82,26 @@
     gap: var(--space-3);
 
     @include tablet-up {
-      grid-template-columns: repeat(2, 1fr);
-      gap: var(--space-4);
-    }
-
-    @include desktop-up {
       grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-4);
     }
   }
 
   .plus-alpha__item {
     display: flex;
     flex-direction: column;
-    gap: var(--space-3);
+    gap: var(--space-2);
   }
 
-  .plus-alpha__figure {
-    aspect-ratio: 4 / 3;
+  .plus-alpha__shot {
+    margin: 0;
+  }
+
+  .plus-alpha__img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-card);
   }
 
   .plus-alpha__title {
@@ -122,21 +117,23 @@
     margin-top: auto;
   }
 
-  // そのほか：カード枠なし・西湖ブルーで自然/水ブロックを示す
-  .plus-alpha__item--more {
-    justify-content: center;
-    align-items: center;
+  // そのほか（水上・キャンプファイア）：西湖ブルーの破線カード
+  .plus-alpha__more {
+    margin-top: var(--space-3);
     padding: var(--space-4);
-    border-radius: var(--radius-card);
     border: 2px dashed var(--blue_1);
-    background-color: transparent;
+    border-radius: var(--radius-card);
+    text-align: center;
+
+    @include tablet-up {
+      margin-top: var(--space-4);
+    }
   }
 
   .plus-alpha__more-text {
     font-size: var(--fs-body);
     font-weight: 500;
-    line-height: var(--lh-loose);
-    text-align: center;
+    line-height: var(--lh-body);
     color: var(--blue_1);
   }
 
