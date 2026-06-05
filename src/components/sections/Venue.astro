@@ -1,48 +1,90 @@
 ---
-// ⑤ 会場・設備のご案内（自然・水のブロック寄り）
-// 西湖の湖畔・富士の伏流水を主役に。西湖ブルーはリード文の縁取りにごく控えめに
+// ⑤ 会場・設備のご案内 — 実際に何があるかを「写真/イラスト＋設備チェックリスト」で。富士の伏流水を主役に
+const facilities = [
+  "完全貸切サイト 最大1,800㎡／大型バス6台（駐車料込み）",
+  "炊事場（富士山の伏流水）",
+  "お手洗い 男女4個以上",
+  "屋内休憩「ゆのわ堂」約100畳（別途料金・雨天対応）",
+  "お土産屋さん手配可能",
+  "大広間への変更も可（人数に応じて）",
+];
 ---
 
-<section class="l-section venue" id="venue">
-  <div class="l-container venue__inner">
-    <!-- 画像（SP: 先頭 / desktop: 左カラム） -->
-    <div class="venue__media">
-      <figure class="c-figure venue__figure">
-        <img
-          src="/images/flyer/facilities_strip.png"
-          alt="会場の設備写真"
-          loading="lazy"
-        />
-      </figure>
-      <figure class="c-figure venue__figure">
-        <img
-          src="/images/flyer/facility_2_yunowado_interior.png"
-          alt="屋内休憩スペース ゆのわ堂の様子"
-          loading="lazy"
-        />
-        <figcaption class="c-figure__cap">屋内休憩「ゆのわ堂」約100畳</figcaption>
-      </figure>
-    </div>
+<section class="venue l-section" id="venue">
+  <div class="l-container">
+    <header class="c-head c-head--left">
+      <p class="c-head__label">VENUE & FACILITIES</p>
+      <h2 class="c-head__title">富士の伏流水と、湖畔の広場。</h2>
+      <p class="c-head__lead">
+        最大1,800㎡のプライベートサイト（駐車スペース含む）を、ひと組で貸切。富士山の伏流水が使える炊事場、男女4個以上のお手洗い、約100畳の屋内休憩スペース「ゆのわ堂」（別途料金）を備えています。人数に応じて、併設「いずみの湯」のお手洗い追加利用や大広間への変更も可能です。
+      </p>
+    </header>
 
-    <!-- 本文＋設備リスト（SP: 画像の下 / desktop: 右カラム） -->
-    <div class="venue__body">
-      <div class="c-head c-head--left venue__head">
-        <h2 class="c-head__title">富士の伏流水と、湖畔の広場。</h2>
-        <p class="c-head__lead venue__lead">
-          最大1,800㎡のプライベートサイト（駐車スペース含む）を、ひと組で貸切。<br />
-          富士山の伏流水が使える炊事場、男女4個以上のお手洗い、約100畳の屋内休憩スペース「ゆのわ堂」（別途料金）を備えています。<br />
-          人数に応じて、併設「いずみの湯」のお手洗い追加利用や大広間への変更も可能です。
-        </p>
-      </div>
+    <!-- 会場ビジュアル ＋ 設備チェックリスト -->
+    <div class="venue__main">
+      <figure class="venue__shot">
+        <img
+          class="venue__img"
+          src="/images/venue/venue_site.png"
+          alt="西湖の湖畔にひろがる貸切サイト。大型バスが並び、団体が芝生でくつろぐ様子"
+          width="1536"
+          height="1024"
+          loading="lazy"
+        />
+        <figcaption class="venue__cap">最大1,800㎡・大型バス6台の貸切サイト</figcaption>
+      </figure>
 
       <ul class="venue__list">
-        <li class="venue__item">完全貸切サイト 最大1,800㎡／大型バス6台（駐車料込み）</li>
-        <li class="venue__item">炊事場（富士山の伏流水）</li>
-        <li class="venue__item">お手洗い 男女4個以上</li>
-        <li class="venue__item">屋内休憩「ゆのわ堂」約100畳（別途料金・雨天対応）</li>
-        <li class="venue__item">お土産屋さん手配可能</li>
-        <li class="venue__item">大広間への変更も可（人数に応じて）</li>
+        {
+          facilities.map((f) => (
+            <li class="venue__item">
+              <span class="venue__check" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+              </span>
+              <span class="venue__item-text">{f}</span>
+            </li>
+          ))
+        }
       </ul>
+    </div>
+
+    <!-- 注目設備：富士の伏流水 ／ ゆのわ堂 -->
+    <div class="venue__highlights">
+      <div class="venue__hl venue__hl--water">
+        <figure class="venue__hl-shot">
+          <img
+            class="venue__img"
+            src="/images/venue/venue_water.png"
+            alt="富士山の伏流水が使える、湖畔の炊事場"
+            width="1536"
+            height="1024"
+            loading="lazy"
+          />
+        </figure>
+        <div class="venue__hl-body">
+          <p class="venue__hl-title">富士山の伏流水が使える炊事場</p>
+          <p class="venue__hl-text">湖畔ならではの澄んだ水。水汲みもでき、団体での調理や準備に重宝します。</p>
+        </div>
+      </div>
+
+      <div class="venue__hl venue__hl--yunowado">
+        <figure class="venue__hl-shot">
+          <img
+            class="venue__img"
+            src="/images/venue/venue_yunowado.png"
+            alt="約100畳の屋内大広間「ゆのわ堂」。畳に座卓が並び、湖を望む明るい屋内"
+            width="1536"
+            height="1024"
+            loading="lazy"
+          />
+        </figure>
+        <div class="venue__hl-body">
+          <p class="venue__hl-title">屋内休憩「ゆのわ堂」約100畳</p>
+          <p class="venue__hl-text">雨の日も安心の屋内スペース。昼食・休憩にゆったり使えます（別途料金）。</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -56,60 +98,46 @@
     color: var(--main_color_1);
   }
 
-  .venue__inner {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-5);
-
-    @include desktop-up {
-      flex-direction: row;
-      align-items: flex-start;
-      gap: var(--space-6);
-    }
-  }
-
-  // ---- メディア（画像）----
-  .venue__media {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-3);
-
-    @include desktop-up {
-      flex: 1 1 0;
-      min-width: 0;
-    }
-  }
-
-  .venue__figure {
-    img {
-      aspect-ratio: 16 / 9;
-    }
-  }
-
-  // ---- 本文＋リスト ----
-  .venue__body {
+  // ---- 会場ビジュアル＋設備リスト ----
+  .venue__main {
     display: flex;
     flex-direction: column;
     gap: var(--space-4);
 
     @include desktop-up {
-      flex: 1 1 0;
-      min-width: 0;
+      flex-direction: row;
+      align-items: flex-start;
+      gap: var(--space-6);
+
+      > * {
+        flex: 1 1 0;
+        min-width: 0;
+      }
     }
   }
 
-  .venue__head {
-    margin-bottom: 0; // c-head の既定下余白を inner の gap に委ねる
+  .venue__shot {
+    margin: 0;
   }
 
-  // 西湖ブルーをリード文の縁取りにごく控えめに
-  .venue__lead {
-    padding-left: var(--space-3);
-    border-left: 4px solid var(--blue_1);
-    color: var(--main_color_1);
+  .venue__img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-card);
   }
 
-  // ---- 設備リスト（チェックマーク付き）----
+  .venue__shot .venue__img {
+    box-shadow: var(--shadow-soft);
+  }
+
+  .venue__cap {
+    display: block;
+    margin-top: var(--space-1);
+    font-size: var(--fs-meta);
+    opacity: 0.8;
+  }
+
   .venue__list {
     display: flex;
     flex-direction: column;
@@ -117,33 +145,70 @@
   }
 
   .venue__item {
-    position: relative;
-    padding-left: spx(56);
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-3);
+    background-color: var(--white);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-soft);
     font-size: var(--fs-body);
     line-height: var(--lh-body);
+  }
+
+  .venue__check {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 1.5em;
+    height: 1.5em;
+    margin-top: 0.1em;
+    border-radius: var(--radius-pill);
+    background-color: var(--blue_1);
+    color: var(--main_color_3);
+
+    svg {
+      width: 62%;
+      height: 62%;
+    }
+  }
+
+  // ---- 注目設備 ----
+  .venue__highlights {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
+    margin-top: var(--space-6);
 
     @include tablet-up {
-      padding-left: tpx(64);
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-4);
     }
+  }
 
-    @include desktop-up {
-      padding-left: ppx(64);
-    }
+  .venue__hl {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding: var(--space-4);
+    background-color: var(--white);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-soft);
+  }
 
-    // 丸いチェックバッジ（SVGチェックを背景で表現・鋭角なし）
-    &::before {
-      content: "";
-      position: absolute;
-      top: 0.15em;
-      left: 0;
-      width: 1.4em;
-      height: 1.4em;
-      border-radius: var(--radius-pill);
-      background-color: var(--blue_1);
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23f1eae4' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: 62%;
-    }
+  .venue__hl-shot {
+    margin: 0;
+  }
+
+  .venue__hl-title {
+    font-size: var(--fs-h3);
+    font-weight: 700;
+    line-height: var(--lh-tight);
+  }
+
+  .venue__hl-text {
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
   }
 </style>
