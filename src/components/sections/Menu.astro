@@ -1,59 +1,61 @@
 ---
-// ⑥ お食事メニュー
-// 料理写真は未支給のため、写真部分は必ず c-ph プレースホルダを使う
+// ⑥ お食事メニュー — 料理写真は未支給のためプレースホルダ。各料理に短い“美味しそう”な一言を追加
+const menus = [
+  {
+    name: "カレーライス",
+    catch: "スパイス香る、みんなが笑顔になる定番。",
+    desc: "サラダ付き",
+    price: "1,100",
+  },
+  {
+    name: "牛丼",
+    catch: "甘辛いタレと牛肉を、あつあつのご飯に。",
+    desc: "サラダ付き",
+    price: "1,100",
+  },
+  {
+    name: "ほうとう定食",
+    catch: "山梨名物・味噌仕立て。具だくさんを小鍋で。",
+    desc: "ほうとう小鍋・唐揚げ・ご飯・漬物・甘味",
+    price: "1,400",
+  },
+];
 ---
 
-<section class="l-section menu">
+<section class="l-section menu" id="menu">
   <div class="l-container">
     <header class="c-head">
       <h2 class="c-head__title">美しい湖を眺めて、みんなで同じ食卓を。</h2>
     </header>
 
     <ul class="menu__list">
-      <!-- 🔴 料理写真 未支給（差し替え） -->
-      <li class="menu__item c-card">
-        <div class="c-ph menu__ph">
-          <span class="c-ph__label">料理写真（準備中）</span>
-          <span class="c-ph__note">🔴 本番写真に差し替え</span>
-        </div>
-        <h3 class="menu__name">カレーライス</h3>
-        <p class="menu__desc">サラダ付き</p>
-        <p class="menu__price">
-          <span class="menu__price-num">1,100</span><span class="menu__price-unit">円</span><span class="menu__price-tax">（税込）</span>
-        </p>
-      </li>
-
-      <!-- 🔴 料理写真 未支給（差し替え） -->
-      <li class="menu__item c-card">
-        <div class="c-ph menu__ph">
-          <span class="c-ph__label">料理写真（準備中）</span>
-          <span class="c-ph__note">🔴 本番写真に差し替え</span>
-        </div>
-        <h3 class="menu__name">牛丼</h3>
-        <p class="menu__desc">サラダ付き</p>
-        <p class="menu__price">
-          <span class="menu__price-num">1,100</span><span class="menu__price-unit">円</span><span class="menu__price-tax">（税込）</span>
-        </p>
-      </li>
-
-      <!-- 🔴 料理写真 未支給（差し替え） -->
-      <li class="menu__item c-card">
-        <div class="c-ph menu__ph">
-          <span class="c-ph__label">料理写真（準備中）</span>
-          <span class="c-ph__note">🔴 本番写真に差し替え</span>
-        </div>
-        <h3 class="menu__name">ほうとう定食</h3>
-        <p class="menu__desc">ほうとう小鍋・唐揚げ・ご飯・漬物・甘味</p>
-        <p class="menu__price">
-          <span class="menu__price-num">1,400</span><span class="menu__price-unit">円</span><span class="menu__price-tax">（税込）</span>
-        </p>
-      </li>
+      {
+        menus.map((m) => (
+          <li class="menu__item c-card">
+            {/* 🔴 料理写真 未支給（差し替え）：本番写真ができたら c-ph を img に置換 */}
+            <div class="c-ph menu__ph">
+              <span class="c-ph__label">料理写真（準備中）</span>
+              <span class="c-ph__note">🔴 本番写真に差し替え</span>
+            </div>
+            <h3 class="menu__name">{m.name}</h3>
+            <p class="menu__catch">{m.catch}</p>
+            <p class="menu__desc">{m.desc}</p>
+            <p class="menu__price">
+              <span class="menu__price-num">{m.price}</span><span class="menu__price-unit">円</span><span class="menu__price-tax">（税込）</span>
+            </p>
+          </li>
+        ))
+      }
     </ul>
 
     <div class="menu__notes">
-      <p class="c-note">※価格はお一人さま・税込。別途、貸切利用料 500円/名 を頂戴します。</p>
-      <!-- 🔴 原材料表PDFは⑩資料DLに設置（準備中） -->
-      <p class="c-note">※アレルギーに対応いたします。原材料表（メニュー／アレルギー対応）もご用意しています。</p>
+      <p class="c-note">
+        ※価格はお一人さま・税込。別途、貸切利用料 500円/名 を頂戴します。
+      </p>
+      {/* 🔴 原材料表PDFは⑩資料DLに設置（準備中） */}
+      <p class="c-note">
+        ※アレルギーに対応いたします。原材料表（メニュー／アレルギー対応）もご用意しています。
+      </p>
     </div>
   </div>
 </section>
@@ -91,9 +93,18 @@
     line-height: var(--lh-tight);
   }
 
-  .menu__desc {
+  // 美味しそうな一言
+  .menu__catch {
     font-size: var(--fs-body);
+    font-weight: 500;
     line-height: var(--lh-body);
+    color: var(--main_color_1);
+  }
+
+  .menu__desc {
+    font-size: var(--fs-meta);
+    line-height: var(--lh-body);
+    opacity: 0.8;
   }
 
   .menu__price {
@@ -101,7 +112,7 @@
     display: flex;
     align-items: baseline;
     flex-wrap: wrap;
-    gap: var(--space-1);
+    gap: 0.1em;
     font-weight: 700;
     line-height: 1;
     color: var(--main_color_1);
