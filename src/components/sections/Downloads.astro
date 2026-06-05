@@ -1,11 +1,28 @@
 ---
 // ⑩ 資料ダウンロード
 // 原材料表・アレルギー対応表（PDF）。手配前の確認用。
-// 🔴 原材料表PDF・アレルギー対応表PDF 未用意（差し替え）
+// 🔴 PDF未用意のうちは consts.ts の値が空文字 → 「準備中」表示（リンク化せず404を防ぐ）。
+//    確定後は consts.ts にパスを入れるだけで自動的に有効化される。
 import { SITE } from '../../consts';
+
+const docs = [
+  {
+    label: '団体食事メニュー 原材料表',
+    href: SITE.ingredientsPdf,
+    gaLabel: 'ingredients',
+  },
+  {
+    label: 'アレルギー対応 原材料表',
+    href: SITE.allergyPdf,
+    gaLabel: 'allergy',
+  },
+].map((d) => ({ ...d, ready: !!d.href }));
+
+// すべて準備中のときだけ、まとめて注記を出す
+const allSoon = docs.every((d) => !d.ready);
 ---
 
-<section class="l-section" id="downloads">
+<section class="l-section downloads" id="downloads">
   <div class="l-container l-container--narrow">
     <div class="c-head">
       <h2 class="c-head__title">原材料表・アレルギー対応表</h2>
@@ -14,31 +31,49 @@ import { SITE } from '../../consts';
       </p>
     </div>
 
-    <!-- 🔴 原材料表PDF・アレルギー対応表PDF 未用意（差し替え） -->
-    <div class="downloads__cta c-cta">
-      <a
-        class="c-btn c-btn--ghost"
-        href={SITE.ingredientsPdf}
-        data-ga-event="pdf_download"
-        data-ga-label="ingredients"
-        target="_blank"
-        rel="noopener"
-      >
-        団体食事メニュー 原材料表（PDF）
-      </a>
-      <a
-        class="c-btn c-btn--ghost"
-        href={SITE.allergyPdf}
-        data-ga-event="pdf_download"
-        data-ga-label="allergy"
-        target="_blank"
-        rel="noopener"
-      >
-        アレルギー対応 原材料表（PDF）
-      </a>
-    </div>
+    <ul class="downloads__list">
+      {
+        docs.map((d) =>
+          d.ready ? (
+            <li class="downloads__item">
+              <a
+                class="downloads__btn downloads__btn--ready"
+                href={d.href}
+                data-ga-event="pdf_download"
+                data-ga-label={d.gaLabel}
+                target="_blank"
+                rel="noopener"
+              >
+                <span class="downloads__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                    <polyline points="14 2 14 8 20 8" />
+                  </svg>
+                </span>
+                <span class="downloads__label">{d.label}</span>
+                <span class="downloads__pdf-tag" aria-hidden="true">PDF</span>
+              </a>
+            </li>
+          ) : (
+            <li class="downloads__item">
+              {/* 🔴 PDF未用意：リンク化せず disabled 風で表示（クリック不可・404回避） */}
+              <span class="downloads__btn downloads__btn--soon" aria-disabled="true">
+                <span class="downloads__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                    <polyline points="14 2 14 8 20 8" />
+                  </svg>
+                </span>
+                <span class="downloads__label">{d.label}</span>
+                <span class="downloads__soon-tag">準備中</span>
+              </span>
+            </li>
+          )
+        )
+      }
+    </ul>
 
-    <p class="downloads__note c-note">※PDFは準備中です。</p>
+    {allSoon && <p class="downloads__note c-note">※PDFは準備中です。確定しだい掲載します。</p>}
   </div>
 </section>
 
@@ -47,8 +82,108 @@ import { SITE } from '../../consts';
   @import "../../styles/functions";
   @import "../../styles/mixins";
 
-  .downloads__cta {
+  .downloads__list {
     margin-top: var(--space-5);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+
+    @include tablet-up {
+      flex-direction: row;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+  }
+
+  .downloads__item {
+    @include tablet-up {
+      flex: 0 1 auto;
+    }
+  }
+
+  // ボタン共通（資料DL専用。c-btn とは別で、アイコン＋ラベル＋タグの3点構成）
+  .downloads__btn {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    width: 100%;
+    padding: var(--space-3) var(--space-4);
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--main_color_1);
+    background-color: var(--white);
+    color: var(--main_color_1);
+    font-size: var(--fs-body);
+    font-weight: 700;
+    line-height: var(--lh-tight);
+    text-align: left;
+  }
+
+  .downloads__icon {
+    flex: 0 0 auto;
+    display: inline-flex;
+    width: 1.4em;
+    height: 1.4em;
+  }
+
+  // _base.scss の `svg { height: auto }` を打ち消すため詳細度を上げて固定
+  .downloads__btn .downloads__icon svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .downloads__label {
+    flex: 1 1 auto;
+  }
+
+  // 「PDF」タグ（有効時）
+  .downloads__pdf-tag {
+    flex-shrink: 0;
+    padding: 0.1em 0.6em;
+    border-radius: var(--radius-tag);
+    background-color: var(--main_color_3);
+    color: var(--main_color_1);
+    font-size: var(--fs-meta);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+
+  // 有効ボタン：ホバーで反転
+  .downloads__btn--ready {
+    transition:
+      background-color var(--dur-base) var(--ease-soft),
+      color var(--dur-base) var(--ease-soft);
+
+    @include hover {
+      &:hover {
+        background-color: var(--main_color_1);
+        color: var(--main_color_3);
+
+        .downloads__pdf-tag {
+          background-color: var(--main_color_2);
+          color: var(--main_color_1);
+        }
+      }
+    }
+  }
+
+  // 準備中：クリック不可・トーンダウン
+  .downloads__btn--soon {
+    opacity: 0.55;
+    cursor: not-allowed;
+    pointer-events: none;
+    border-style: dashed;
+    background-color: var(--main_color_3);
+  }
+
+  .downloads__soon-tag {
+    flex-shrink: 0;
+    padding: 0.1em 0.6em;
+    border-radius: var(--radius-tag);
+    background-color: var(--main_color_1);
+    color: var(--main_color_3);
+    font-size: var(--fs-meta);
+    font-weight: 700;
   }
 
   .downloads__note {

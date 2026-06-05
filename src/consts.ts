@@ -50,9 +50,9 @@ export const SITE = {
   // 🔴 Measurement ID 未発行（ダミー）。環境変数 PUBLIC_GA4_ID で差し替え
   ga4Id: env.PUBLIC_GA4_ID ?? 'G-XXXXXXXXXX',
 
-  // --- 資料DL（🔴 PDF未用意：確定後に public/docs/ へ設置） ---
-  ingredientsPdf: '/docs/ingredients.pdf', // 🔴 原材料表PDF 未用意（ダミーパス）
-  allergyPdf: '/docs/allergy.pdf', // 🔴 アレルギー対応表PDF 未用意（ダミーパス）
+  // --- 資料DL（🔴 PDF未用意：空文字＝「準備中」表示。確定後に public/docs/ のパスを入れると自動で有効化） ---
+  ingredientsPdf: '', // 🔴 原材料表PDF 未用意。例: '/docs/ingredients.pdf'
+  allergyPdf: '', // 🔴 アレルギー対応表PDF 未用意。例: '/docs/allergy.pdf'
 } as const;
 
 // SEO 既定値
