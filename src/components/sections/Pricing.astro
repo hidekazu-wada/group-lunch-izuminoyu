@@ -67,6 +67,17 @@ import { SITE } from '../../consts';
       </div>
     </div>
 
+    <!-- 料金表の注記（用語補足＋ダミー注記） -->
+    <div class="pricing__notes">
+      <p class="c-note">
+        ※「最低保証」は、ご利用人数が少ない場合の貸切1組あたりの下限料金です。
+      </p>
+      {/* 🔴 料金・滞在時間・最低保証・提供時間帯・営業日 未確定（確定後に差し替え） */}
+      <p class="c-note">
+        ※料金・滞在時間・提供時間帯・営業日は、確定しだいご案内します。
+      </p>
+    </div>
+
     <!-- ポイント -->
     <div class="pricing__point c-card">
       <p class="pricing__point-text">
@@ -75,6 +86,27 @@ import { SITE } from '../../consts';
       <p class="pricing__point-text pricing__point-text--ex">
         （例：カレーライスご利用 1,100円＋貸切利用料500円＝<strong>お一人さま1,600円・税込</strong>）
       </p>
+    </div>
+
+    <!-- 表直後の軽量CTA（料金に納得した瞬間に相談へ） -->
+    <div class="pricing__cta">
+      <p class="pricing__cta-lead">人数・ご予算に合わせて、お見積りします。</p>
+      <div class="c-cta">
+        <a
+          class="c-btn c-btn--tel"
+          href={SITE.telHref}
+          data-ga-event="tel_tap"
+          data-ga-label="pricing"
+        >
+          <span class="c-btn__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"></path>
+            </svg>
+          </span>
+          お電話で相談｜{SITE.tel}
+        </a>
+        <a class="c-btn c-btn--form" href="#contact">問い合わせフォーム</a>
+      </div>
     </div>
 
     <!-- ご利用条件 -->
@@ -209,9 +241,11 @@ import { SITE } from '../../consts';
       box-shadow: inset 0 0 0 2px var(--main_color_2);
     }
 
+    // テーブル時：右端の数値（最低保証）と被るため、行の左上隅へ移す
     .pricing__badge {
-      top: 50%;
-      right: var(--space-4);
+      top: 0;
+      right: auto;
+      left: var(--space-5);
       transform: translateY(-50%);
     }
 
@@ -233,6 +267,19 @@ import { SITE } from '../../consts';
     .pricing__row {
       padding: var(--space-4) var(--space-6);
     }
+
+    // 行paddingの拡大に合わせてバッジ位置も揃える
+    .pricing__badge {
+      left: var(--space-6);
+    }
+  }
+
+  // ---- 料金表の注記 -------------------------------------------
+  .pricing__notes {
+    margin-top: var(--space-3);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
   }
 
   // ---- ポイント（おすすめ訴求カード） -------------------------
@@ -252,6 +299,32 @@ import { SITE } from '../../consts';
 
   .pricing__point-text--ex {
     color: var(--blue_1);
+  }
+
+  // ---- 表直後CTA（軽量） -------------------------------------
+  .pricing__cta {
+    margin-top: var(--space-5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-3);
+    text-align: center;
+  }
+
+  .pricing__cta-lead {
+    font-size: var(--fs-h3);
+    font-weight: 700;
+    line-height: var(--lh-tight);
+    color: var(--main_color_1);
+  }
+
+  // CTAボタン：SPは全幅、tablet-up以上は内容幅（CtaBandと挙動を揃える）
+  .pricing__cta .c-cta {
+    width: 100%;
+
+    @include tablet-up {
+      width: auto;
+    }
   }
 
   // ---- ご利用条件 --------------------------------------------
