@@ -140,11 +140,6 @@ import { SITE } from '../../consts';
     gap: var(--space-3);
   }
 
-  // SPでは見出し行を隠す（各カード内にラベルを出す）
-  .pricing__row--head {
-    display: none;
-  }
-
   .pricing__row {
     position: relative;
     display: flex;
@@ -161,6 +156,12 @@ import { SITE } from '../../consts';
     background-color: var(--main_color_3);
     box-shadow: var(--shadow-card);
     border: 2px solid var(--main_color_2);
+  }
+
+  // SPでは見出し行（テーブル用ヘッダ）を隠す。
+  // .pricing__row の display:flex に勝つよう詳細度を上げる
+  .pricing__table .pricing__row--head {
+    display: none;
   }
 
   .pricing__badge {
@@ -221,15 +222,16 @@ import { SITE } from '../../consts';
       border-bottom: 1px solid rgba(124, 99, 81, 0.12);
     }
 
-    .pricing__row--head {
+    // tablet-up で見出し行を再表示（SPの隠し指定と詳細度を揃える）
+    .pricing__table .pricing__row--head {
       display: flex;
       background-color: var(--main_color_1);
+    }
 
-      .pricing__cell {
-        font-size: var(--fs-meta);
-        font-weight: 700;
-        color: var(--main_color_3);
-      }
+    .pricing__row--head .pricing__cell {
+      font-size: var(--fs-meta);
+      font-weight: 700;
+      color: var(--main_color_3);
     }
 
     .pricing__row:last-child {
