@@ -1,19 +1,23 @@
 ---
-// ⑧ 温泉・お土産
-// 背景：西湖ブルー（自然・水のブロック）。文字はクリーム
-// SPは縦（画像→本文）／ desktop-up で 画像＋テキストの2カラム
+// ⑧ 温泉・お土産 — 食べたらそのまま入浴（ワンストップの締め）。西湖ブルー背景＋温泉ギャラリー（メイン＋サブ）
+// 画像はメイン1枚＋サブ2枚を想定（こちらで用意）。お土産は一文＋小アイコンで軽く
+import { Image, getImage } from "astro:assets";
+import onsenMain from "../../assets/images/onsen/onsen_main.jpg";
+import onsenSub1 from "../../assets/images/onsen/onsen_sub1.jpg";
+import onsenSub2 from "../../assets/images/onsen/onsen_sub2.jpg";
+import onsenBgSrc from "../../assets/images/onsen/onsen_bg.jpg";
+
+// 背景画像はCSSで使うため getImage で最適化WebPのURLを取得
+const onsenBg = await getImage({
+  src: onsenBgSrc,
+  width: 1600,
+  format: "webp",
+});
 ---
 
-<section class="l-section l-section--blue onsen" id="onsen">
+<section class="onsen l-section l-section--blue" id="onsen">
+  <div class="onsen__bg" aria-hidden="true" style={`--onsen-bg: url(${onsenBg.src})`}></div>
   <div class="l-container onsen__inner">
-    <figure class="c-figure onsen__figure">
-      <img
-        src="/images/flyer/facility_5_onsen_bath.png"
-        alt="併設の日帰り温泉 いずみの湯の浴場"
-        loading="lazy"
-      />
-    </figure>
-
     <div class="onsen__body">
       <div class="c-head c-head--left onsen__head">
         <h2 class="c-head__title">食べたら、そのまま、ひとっ風呂。</h2>
@@ -22,14 +26,56 @@
       <p class="onsen__text">
         併設の日帰り温泉「いずみの湯」で、お食事のあとはそのまま入浴まで。移動なしで楽しめるのが、団体さまに喜ばれています。
       </p>
-      <p class="onsen__text">
-        お土産の手配も可能です。旅の締めくくりまで、この一か所で。
+
+      <p class="onsen__souvenir">
+        <span class="onsen__souvenir-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 8h14l-1 12H6L5 8z" />
+            <path d="M9 8a3 3 0 0 1 6 0" />
+          </svg>
+        </span>
+        団体様でご利用いただける、お土産屋さんの手配も可能です。旅の締めくくりまで、この一か所で。
       </p>
 
-      <!-- 🔴 団体入浴料金・タオル 未確定（差し替え） -->
-      <p class="c-note onsen__note">
+      {/* 🔴 団体入浴料金・タオル 未確定（差し替え） */}
+      <p class="onsen__note">
         ※団体入浴料金・タオルのご用意については、確定しだいご案内します。
       </p>
+    </div>
+
+    <div class="onsen__gallery">
+      <figure class="onsen__main">
+        <Image
+          class="onsen__img"
+          src={onsenMain}
+          alt="併設の日帰り温泉「いずみの湯」の内湯。大きな窓から紅葉が見える浴場"
+          width={1200}
+          format="webp"
+          loading="lazy"
+        />
+      </figure>
+      <div class="onsen__subs">
+        <figure class="onsen__sub">
+          <Image
+            class="onsen__img"
+            src={onsenSub1}
+            alt="紅葉に囲まれた露天風呂"
+            width={700}
+            format="webp"
+            loading="lazy"
+          />
+        </figure>
+        <figure class="onsen__sub">
+          <Image
+            class="onsen__img"
+            src={onsenSub2}
+            alt="清潔な脱衣・休憩スペース"
+            width={700}
+            format="webp"
+            loading="lazy"
+          />
+        </figure>
+      </div>
     </div>
   </div>
 </section>
@@ -39,7 +85,30 @@
   @import "../../styles/functions";
   @import "../../styles/mixins";
 
+  // 背景：温泉写真＋青系グラデオーバーレイ（写真は控えめ・文字は読みやすく）
+  .onsen {
+    position: relative;
+    overflow: clip;
+  }
+
+  .onsen__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-image:
+      linear-gradient(
+        165deg,
+        rgba(90, 138, 173, 0.86) 0%,
+        rgba(56, 94, 126, 0.94) 100%
+      ),
+      var(--onsen-bg);
+    background-size: cover;
+    background-position: center;
+  }
+
   .onsen__inner {
+    position: relative;
+    z-index: 1;
     display: flex;
     flex-direction: column;
     gap: var(--space-5);
@@ -48,46 +117,99 @@
       flex-direction: row;
       align-items: center;
       gap: var(--space-6);
+
+      > * {
+        flex: 1 1 0;
+        min-width: 0;
+      }
     }
   }
 
-  .onsen__figure {
-    width: 100%;
-
-    @include desktop-up {
-      flex: 1 1 0;
-      align-self: stretch;
-    }
-
-    img {
-      aspect-ratio: 4 / 3;
-    }
-  }
-
-  .onsen__body {
-    @include desktop-up {
-      flex: 1 1 0;
-    }
-  }
-
+  // ---- テキスト（反転＝クリーム） ----
   .onsen__head {
-    margin-bottom: var(--space-4);
+    margin-bottom: var(--space-3);
   }
 
   .onsen__text {
     font-size: var(--fs-body);
     line-height: var(--lh-loose);
     color: var(--main_color_3);
+  }
 
-    & + & {
-      margin-top: var(--space-3);
+  .onsen__souvenir {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-2);
+    margin-top: var(--space-3);
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius-card);
+    background-color: rgba(255, 255, 255, 0.14);
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+    color: var(--main_color_3);
+  }
+
+  .onsen__souvenir-icon {
+    flex-shrink: 0;
+    width: 1.5em;
+    height: 1.5em;
+    margin-top: 0.1em;
+
+    svg {
+      width: 100%;
+      height: 100%;
     }
   }
 
-  // 反転背景でも読めるよう、注記はクリーム文字で
   .onsen__note {
-    margin-top: var(--space-4);
+    margin-top: var(--space-3);
+    font-size: var(--fs-meta);
+    line-height: var(--lh-body);
     color: var(--main_color_3);
     opacity: 0.85;
+  }
+
+  // ---- 温泉ギャラリー（メイン＋サブ2） ----
+  .onsen__gallery {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .onsen__main {
+    margin: 0;
+  }
+
+  .onsen__main .onsen__ph,
+  .onsen__main :global(.onsen__img) {
+    aspect-ratio: 3 / 2;
+  }
+
+  .onsen__subs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-2);
+  }
+
+  .onsen__sub {
+    margin: 0;
+  }
+
+  .onsen__sub .onsen__ph,
+  .onsen__sub :global(.onsen__img) {
+    aspect-ratio: 1 / 1;
+  }
+
+  // 画像共通（差し替え時）
+  .onsen__ph {
+    border-radius: var(--radius-card);
+  }
+
+  :global(.onsen__img) {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--radius-card);
   }
 </style>

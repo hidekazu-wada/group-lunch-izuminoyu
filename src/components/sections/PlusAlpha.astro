@@ -1,18 +1,23 @@
 ---
 // ⑦ ＋αの使い方（休憩・体験スポット）— 昼食＋αで一日たっぷり。体験イラストは生成予定（今はプレースホルダ）
+import { Image } from "astro:assets";
+import molkky from "../../assets/images/activities/molkky.png";
+import kunimasu from "../../assets/images/activities/kunimasu.png";
+import jukai from "../../assets/images/activities/jukai.png";
+
 const activities = [
   {
-    img: "/images/activities/molkky.png",
+    img: molkky,
     name: "モルック体験",
     tags: ["10〜100名", "約2時間", "雨天対応"],
   },
   {
-    img: "/images/activities/kunimasu.png",
+    img: kunimasu,
     name: "クニマス学習",
     tags: ["10〜200名", "約2時間〜", "雨天対応"],
   },
   {
-    img: "/images/activities/jukai.png",
+    img: jukai,
     name: "樹海トレイル",
     tags: ["青木ヶ原", "10〜100名", "約2〜2.5時間", "雨天対応"],
   },
@@ -33,12 +38,12 @@ const activities = [
         activities.map((a) => (
           <li class="plus-alpha__item c-card">
             <figure class="plus-alpha__shot">
-              <img
+              <Image
                 class="plus-alpha__img"
                 src={a.img}
                 alt={`${a.name}の様子`}
-                width="1536"
-                height="1024"
+                width={800}
+                format="webp"
                 loading="lazy"
               />
             </figure>

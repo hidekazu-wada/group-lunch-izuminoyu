@@ -1,5 +1,10 @@
 ---
 // ⑤ 会場・設備のご案内 — 実際に何があるかを「写真/イラスト＋設備チェックリスト」で。富士の伏流水を主役に
+import { Image } from "astro:assets";
+import venueSite from "../../assets/images/venue/venue_site.png";
+import venueWater from "../../assets/images/venue/venue_water.png";
+import venueYunowado from "../../assets/images/venue/venue_yunowado.png";
+
 const facilities = [
   "完全貸切サイト 最大1,800㎡／大型バス6台（駐車料込み）",
   "炊事場（富士山の伏流水）",
@@ -23,12 +28,12 @@ const facilities = [
     <!-- 会場ビジュアル ＋ 設備チェックリスト -->
     <div class="venue__main">
       <figure class="venue__shot">
-        <img
+        <Image
           class="venue__img"
-          src="/images/venue/venue_site.png"
+          src={venueSite}
           alt="西湖の湖畔にひろがる貸切サイト。大型バスが並び、団体が芝生でくつろぐ様子"
-          width="1536"
-          height="1024"
+          width={1100}
+          format="webp"
           loading="lazy"
         />
         <figcaption class="venue__cap">最大1,800㎡・大型バス6台の貸切サイト</figcaption>
@@ -54,12 +59,12 @@ const facilities = [
     <div class="venue__highlights">
       <div class="venue__hl venue__hl--water">
         <figure class="venue__hl-shot">
-          <img
+          <Image
             class="venue__img"
-            src="/images/venue/venue_water.png"
+            src={venueWater}
             alt="富士山の伏流水が使える、湖畔の炊事場"
-            width="1536"
-            height="1024"
+            width={900}
+            format="webp"
             loading="lazy"
           />
         </figure>
@@ -71,12 +76,12 @@ const facilities = [
 
       <div class="venue__hl venue__hl--yunowado">
         <figure class="venue__hl-shot">
-          <img
+          <Image
             class="venue__img"
-            src="/images/venue/venue_yunowado.png"
+            src={venueYunowado}
             alt="約100畳の屋内大広間「ゆのわ堂」。畳に座卓が並び、湖を望む明るい屋内"
-            width="1536"
-            height="1024"
+            width={900}
+            format="webp"
             loading="lazy"
           />
         </figure>

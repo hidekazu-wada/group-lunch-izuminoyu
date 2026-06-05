@@ -3,6 +3,13 @@
 // 序列：ワンストップ×貸切 → 規模 → 環境／要点帯は「安心バッジ帯」／電話を主CTAに
 // 背景：西湖の水際。富士山は控えめ、湖の景観を主役に
 import { SITE } from "../../consts";
+import { getImage } from "astro:assets";
+import heroPcSrc from "../../assets/images/hero/hero_lakeside.png";
+import heroSpSrc from "../../assets/images/hero/hero_lakeside_sp.png";
+
+// ヒーロー背景：PC/SPを WebP に最適化して picture で出し分け
+const heroPc = await getImage({ src: heroPcSrc, width: 1672, format: "webp" });
+const heroSp = await getImage({ src: heroSpSrc, width: 900, format: "webp" });
 
 // 安心材料バッジ（手配者の不安に先回り）
 const badges = [
@@ -19,13 +26,10 @@ const badges = [
     /* ヒーロー画像（生成した仮ビジュアル）。SPは縦版に出し分け。本番写真ができたら同パスで差し替え可 */
   }
   <picture class="hero__media">
-    <source
-      media="(max-width: 743px)"
-      srcset="/images/hero/hero_lakeside_sp.png"
-    />
+    <source media="(max-width: 743px)" srcset={heroSp.src} />
     <img
       class="hero__bg"
-      src="/images/hero/hero_lakeside.png"
+      src={heroPc.src}
       alt="西湖畔の貸切広場に集う団体と大型バス、奥に富士山"
       width="1672"
       height="941"

@@ -1,6 +1,9 @@
 ---
 // ② 希少性（つかみ）— PAS：手配者の痛みに共感 → いずみの湯ならまるごと解決
 import { SITE } from "../../consts";
+import { Image } from "astro:assets";
+import crowdBusy from "../../assets/images/scarcity/crowd_busy.png";
+import privateLakeside from "../../assets/images/scarcity/private_lakeside.png";
 
 // 手配者の“段取り”の痛み（共感）
 const pains = [
@@ -38,9 +41,11 @@ const pains = [
       <!-- 対比：混雑する観光地 → ひと組貸切の自社サイト -->
       <div class="scarcity__contrast">
         <figure class="scarcity__shot scarcity__shot--pain">
-          <img
-            src="/images/scarcity/crowd_busy.png"
+          <Image
+            src={crowdBusy}
             alt="繁忙期に混雑する観光地の駐車場と人混み（イメージ）"
+            width={1100}
+            format="webp"
             loading="lazy"
           />
           <figcaption class="scarcity__cap scarcity__cap--pain">繁忙期は、どこも混雑</figcaption>
@@ -53,9 +58,11 @@ const pains = [
         </span>
 
         <figure class="scarcity__shot scarcity__shot--relief">
-          <img
-            src="/images/scarcity/private_lakeside.png"
+          <Image
+            src={privateLakeside}
             alt="西湖畔の貸切サイトに、ゆったり停まる大型バス"
+            width={1100}
+            format="webp"
             loading="lazy"
           />
           <figcaption class="scarcity__cap scarcity__cap--relief">貸切でノンストレス</figcaption>

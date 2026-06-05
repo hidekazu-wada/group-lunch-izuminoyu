@@ -2,6 +2,8 @@
 // <head> の中身（meta / OGP / フォント / GA4 / 構造化データ）
 // index.astro 側で <head><Head /></head> として使う
 import { SITE, SEO } from '../../consts';
+import { getImage } from 'astro:assets';
+import ogImageSrc from '../../assets/images/hero/hero_lakeside.png';
 
 interface Props {
   title?: string;
@@ -11,8 +13,9 @@ interface Props {
 const { title = SEO.title, description = SEO.description } = Astro.props;
 const ga4Id = SITE.ga4Id; // 🔴 環境変数 PUBLIC_GA4_ID（未発行時はダミー G-XXXXXXXXXX）
 
-// OGP画像は絶対URLが望ましい。Astro.site 未設定でも動くよう相対パスをフォールバック
-const ogImage = new URL(SEO.ogImage, Astro.site ?? Astro.url).toString();
+// OGP画像：ヒーロー画像を 1200px の WebP に最適化。絶対URLが望ましいので Astro.site/url で解決
+const ogImageGen = await getImage({ src: ogImageSrc, width: 1200, format: 'webp' });
+const ogImage = new URL(ogImageGen.src, Astro.site ?? Astro.url).toString();
 
 // 構造化データ（LocalBusiness）— SEO加点（任意）
 const jsonLd = {

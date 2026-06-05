@@ -1,5 +1,12 @@
 ---
 // ④ 選ばれる理由 — インフォグラフィック画像（PC/SP出し分け）。見出し・altはコード側で保持
+import { getImage } from "astro:assets";
+import infographicPcSrc from "../../assets/images/reasons/reasons_infographic.png";
+import infographicSpSrc from "../../assets/images/reasons/reasons_infographic-sp.png";
+
+// インフォグラフィック：PC/SPを WebP に最適化して picture で出し分け
+const infographicPc = await getImage({ src: infographicPcSrc, width: 1024, format: "webp" });
+const infographicSp = await getImage({ src: infographicSpSrc, width: 1024, format: "webp" });
 ---
 
 <section class="reasons l-section l-section--cream" id="reasons">
@@ -11,12 +18,9 @@
 
     <figure class="reasons__figure">
       <picture>
-        <source
-          media="(max-width: 743px)"
-          srcset="/images/reasons/reasons_infographic-sp.png"
-        />
+        <source media="(max-width: 743px)" srcset={infographicSp.src} />
         <img
-          src="/images/reasons/reasons_infographic.png"
+          src={infographicPc.src}
           alt="選ばれる理由。①他では難しい“規模を、貸切で”：最大250名・1,800㎡を、相席なしの『ひと組貸切』で一度に。河口湖周辺でこの規模を貸切で受けられる場所は多くありません。②ぜんぶ“この一か所”だから移動0：食事・温泉・お土産・写真撮影・休憩がすべてその場で、移動・乗り降り0分。空いた時間を食事と体験に使えます。③手配がラク、当日まで安心：大型バス6台はそのまま駐車（駐車料込み）、準備不要で当日は到着するだけ、雨の日も約100畳の屋内『ゆのわ堂』で予定はそのまま。"
           width="1024"
           height="1536"

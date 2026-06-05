@@ -2,6 +2,8 @@
 // ⑪ アクセス
 // 西湖畔の施設までの案内。情報ブロック＋Googleマップ（SP縦／PC2カラム）
 import { SITE } from '../../consts';
+import { Image } from 'astro:assets';
+import busParking from '../../assets/images/flyer/facility_1_bus_parking.png';
 ---
 
 <section class="l-section l-section--cream access" id="access">
@@ -43,9 +45,11 @@ import { SITE } from '../../consts';
         </dl>
 
         <figure class="access__figure c-figure">
-          <img
-            src="/images/flyer/facility_1_bus_parking.png"
+          <Image
+            src={busParking}
             alt="大型バスの駐車スペース"
+            width={900}
+            format="webp"
             loading="lazy"
           />
           <figcaption class="c-figure__cap">大型バス6台分の駐車スペース</figcaption>
