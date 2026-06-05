@@ -1,101 +1,29 @@
 ---
-// ④ 選ばれる理由
-// 6つの強みを白カードで提示。SP1列 → tablet-up 2列 → desktop-up 3列
-// アイコンは丸バッジ＋インラインSVGの線画（絵文字は使わない）
-const reasons = [
-  {
-    title: '完全貸切・最大250名',
-    text: '大型バス6台、ひと組貸切のプライベート空間',
-    icon: 'group',
-  },
-  {
-    title: '西湖の絶景',
-    text: '水際のロケーション。記念撮影にも',
-    icon: 'lake',
-  },
-  {
-    title: '温泉併設',
-    text: 'お食事のあとはそのまま入浴まで一か所で',
-    icon: 'onsen',
-  },
-  {
-    title: '手ぶらでOK',
-    text: '準備不要、当日は到着するだけ',
-    icon: 'check',
-  },
-  {
-    title: '雨天も安心',
-    text: '約100畳の屋内休憩「ゆのわ堂」あり',
-    icon: 'roof',
-  },
-  {
-    title: '体験もセット可',
-    text: '教育コンテンツ・チームビルディングにも対応',
-    icon: 'sparkle',
-  },
-];
+// ④ 選ばれる理由 — インフォグラフィック画像（PC/SP出し分け）。見出し・altはコード側で保持
 ---
 
 <section class="reasons l-section l-section--cream" id="reasons">
   <div class="l-container">
     <div class="c-head">
+      <p class="c-head__label">WHY IZUMINOYU</p>
       <h2 class="c-head__title">いずみの湯が、団体の昼食に選ばれる理由。</h2>
     </div>
 
-    <ul class="reasons__list">
-      {
-        reasons.map((reason) => (
-          <li class="reasons__item c-card">
-            <span class="reasons__badge" aria-hidden="true">
-              {reason.icon === 'group' && (
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-                  <circle cx="9" cy="7" r="4" />
-                  <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-                  <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                </svg>
-              )}
-              {reason.icon === 'lake' && (
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M3 8l5-5 4 6 3-3 6 8" />
-                  <path d="M2 17c1.5 1.2 3 1.2 4.5 0S9.5 15.8 11 17s3 1.2 4.5 0S18.5 15.8 20 17" />
-                  <path d="M2 21c1.5 1.2 3 1.2 4.5 0S9.5 19.8 11 21s3 1.2 4.5 0S18.5 19.8 20 21" />
-                </svg>
-              )}
-              {reason.icon === 'onsen' && (
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M8 7c0-1.5-1.5-2-1.5-3.5C6.5 2 8 1.5 8 1.5" />
-                  <path d="M12 7c0-1.5-1.5-2-1.5-3.5C10.5 2 12 1.5 12 1.5" />
-                  <path d="M16 7c0-1.5-1.5-2-1.5-3.5C14.5 2 16 1.5 16 1.5" />
-                  <path d="M3 12h18v4a6 6 0 0 1-6 6H9a6 6 0 0 1-6-6z" />
-                </svg>
-              )}
-              {reason.icon === 'check' && (
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
-                  <path d="M22 4 12 14.01l-3-3" />
-                </svg>
-              )}
-              {reason.icon === 'roof' && (
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M2 11 12 3l10 8" />
-                  <path d="M5 10v10h14V10" />
-                  <path d="M10 20v-5h4v5" />
-                </svg>
-              )}
-              {reason.icon === 'sparkle' && (
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M12 3v4M12 17v4M3 12h4M17 12h4" />
-                  <path d="M12 8a4 4 0 0 0 4 4 4 4 0 0 0-4 4 4 4 0 0 0-4-4 4 4 0 0 0 4-4z" />
-                </svg>
-              )}
-            </span>
-            <h3 class="reasons__title">{reason.title}</h3>
-            <p class="reasons__text">{reason.text}</p>
-          </li>
-        ))
-      }
-    </ul>
+    <figure class="reasons__figure">
+      <picture>
+        <source
+          media="(max-width: 743px)"
+          srcset="/images/reasons/reasons_infographic-sp.png"
+        />
+        <img
+          src="/images/reasons/reasons_infographic.png"
+          alt="選ばれる理由。①他では難しい“規模を、貸切で”：最大250名・1,800㎡を、相席なしの『ひと組貸切』で一度に。河口湖周辺でこの規模を貸切で受けられる場所は多くありません。②ぜんぶ“この一か所”だから移動0：食事・温泉・お土産・写真撮影・休憩がすべてその場で、移動・乗り降り0分。空いた時間を食事と体験に使えます。③手配がラク、当日まで安心：大型バス6台はそのまま駐車（駐車料込み）、準備不要で当日は到着するだけ、雨の日も約100畳の屋内『ゆのわ堂』で予定はそのまま。"
+          width="1024"
+          height="1536"
+          loading="lazy"
+        />
+      </picture>
+    </figure>
   </div>
 </section>
 
@@ -104,64 +32,22 @@ const reasons = [
   @import "../../styles/functions";
   @import "../../styles/mixins";
 
-  .reasons__list {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-3);
-
-    @include tablet-up {
-      grid-template-columns: repeat(2, 1fr);
-      gap: var(--space-4);
-    }
-
-    @include desktop-up {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-
-  .reasons__item {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--space-2);
+  .reasons {
     color: var(--main_color_1);
   }
 
-  // アイコン丸バッジ（茶ベース＋クリーム線画）
-  .reasons__badge {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: spx(96);
-    height: spx(96);
-    border-radius: var(--radius-pill);
-    background-color: var(--main_color_1);
-    color: var(--main_color_3);
+  // 縦長インフォグラフィックを中央寄せ。PCは大きすぎないよう max-width で抑える
+  .reasons__figure {
+    margin: 0 auto;
+    max-width: 720px;
+    border-radius: var(--radius-card);
+    overflow: clip;
+    box-shadow: var(--shadow-soft);
 
-    @include tablet-up {
-      width: tpx(120);
-      height: tpx(120);
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
     }
-
-    @include desktop-up {
-      width: ppx(96);
-      height: ppx(96);
-    }
-
-    svg {
-      width: 55%;
-      height: 55%;
-    }
-  }
-
-  .reasons__title {
-    font-size: var(--fs-h3);
-    font-weight: 700;
-    line-height: var(--lh-tight);
-  }
-
-  .reasons__text {
-    font-size: var(--fs-body);
-    line-height: var(--lh-body);
   }
 </style>
