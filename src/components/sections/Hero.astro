@@ -38,8 +38,20 @@ const badges = [
   </picture>
   <div class="hero__scrim" aria-hidden="true"></div>
 
-  <!-- 要点帯（安心バッジ帯） -->
-  <div class="hero__band">
+  <div class="hero__inner l-container">
+    <h1 class="hero__title">
+      <span class="hero__title-lead"
+        >食事も、温泉も、お土産も、写真撮影も、</span
+      >
+      <span class="hero__title-main">ひと組貸切で。</span>
+      <span class="hero__title-sub">西湖のほとり、団体専用250名の昼食処。</span>
+    </h1>
+
+    <p class="hero__sub">
+      大型バス6台で乗りつけて、お食事・温泉・お土産までこの一か所。混み合う人気店に左右されず、自分たちのペースで。雨の日も、約100畳の屋内会場で安心です。
+    </p>
+
+    <!-- 安心バッジ（手配者の不安に先回り） -->
     <ul class="hero__badges">
       {
         badges.map((b, i) => (
@@ -131,52 +143,6 @@ const badges = [
       }
     </ul>
   </div>
-
-  <div class="hero__inner l-container">
-    <p class="hero__logo">
-      <span class="hero__logo-parent">HAMAYOU RESORT</span>
-      <span class="hero__logo-main">いずみの湯 ／ Wonder Child Park</span>
-    </p>
-
-    <h1 class="hero__title">
-      <span class="hero__title-lead"
-        >食事も、温泉も、お土産も、写真撮影も、</span
-      >
-      <span class="hero__title-main">ひと組貸切で。</span>
-      <span class="hero__title-sub">西湖のほとり、団体専用250名の昼食処。</span>
-    </h1>
-
-    <p class="hero__sub">
-      大型バス6台で乗りつけて、お食事・温泉・お土産までこの一か所。混み合う人気店に左右されず、自分たちのペースで。雨の日も、約100畳の屋内会場で安心です。
-    </p>
-
-    <div class="hero__cta c-cta">
-      <a
-        class="c-btn c-btn--tel"
-        href={SITE.telHref}
-        data-ga-event="tel_tap"
-        data-ga-label="hero"
-      >
-        <span class="c-btn__icon" aria-hidden="true">
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path
-              d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"
-            ></path>
-          </svg>
-        </span>
-        <span class="hero__tel-full">お電話で相談する｜{SITE.tel}</span>
-        <span class="hero__tel-short">お電話で相談</span>
-      </a>
-      <a class="c-btn c-btn--form" href="#contact">問い合わせフォーム</a>
-    </div>
-  </div>
 </section>
 
 <style lang="scss">
@@ -189,7 +155,7 @@ const badges = [
     z-index: 0;
     display: flex;
     flex-direction: column;
-    justify-content: space-between; // 帯=上 / コンテンツ=下
+    justify-content: flex-end; // コンテンツ（見出し〜バッジ）を下寄せ。上部はヘッダー領域
     min-height: 100svh;
     padding-bottom: var(--space-4); // SPはコンテンツを下げる
     overflow: clip; // 背景の拡大はみ出しを抑制
@@ -233,22 +199,13 @@ const badges = [
     );
   }
 
-  // 安心バッジ帯
-  .hero__band {
-    position: relative;
-    z-index: 1;
-    width: 100%;
-    background-color: var(--surface-brown-solid); // フッターと同じベタ茶
-  }
-
+  // 安心バッジ（CTA直下。チップ自体に半透明背景があるので写真上でも読める）
   .hero__badges {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: center;
     gap: clamp(6px, 0.9vw, 12px);
-    // 上下の余白をしっかり確保（詰まり解消）。上下のみ広め
-    padding: clamp(13px, 1.9vw, 26px) clamp(12px, 3vw, 40px);
+    margin-top: var(--space-1); // inner の gap に少し足してCTAと区切る
   }
 
   // SPで3+2に割るための強制改行（tablet-up以上は1行なので無効化）
@@ -323,39 +280,6 @@ const badges = [
     gap: var(--space-3);
   }
 
-  // 空にかかっても読めるよう、ロゴ下に控えめなフロストプレートを敷く
-  .hero__logo {
-    display: inline-flex;
-    flex-direction: column;
-    align-self: flex-start;
-    gap: 2px;
-    margin-bottom: var(--space-3); // メインコピーとの間を空ける
-    padding: clamp(8px, 1vw, 14px) clamp(14px, 1.6vw, 22px);
-    border-radius: var(--radius-card);
-    background-color: rgba(40, 30, 24, 0.34);
-    backdrop-filter: blur(6px);
-    text-shadow: 0 1px 6px rgba(28, 20, 14, 0.45);
-
-    @include tablet-up {
-      margin-bottom: var(--space-4);
-    }
-  }
-
-  // 母体ブランド（上・小さめ）
-  .hero__logo-parent {
-    font-size: var(--fs-meta);
-    font-weight: 500;
-    letter-spacing: var(--ls-label);
-    opacity: 0.85;
-  }
-
-  // メイン（いずみの湯／WCP）
-  .hero__logo-main {
-    font-size: var(--fs-h3);
-    font-weight: 700;
-    line-height: 1.2;
-  }
-
   // 見出し：列挙(ワンストップ) → 貸切(主役) → 西湖/規模
   .hero__title {
     display: flex;
@@ -389,37 +313,5 @@ const badges = [
       0 1px 2px rgba(28, 20, 14, 0.4),
       0 1px 14px rgba(28, 20, 14, 0.6);
     word-break: auto-phrase; // 日本語を文節で自然改行
-  }
-
-  .hero__cta {
-    width: 100%;
-    margin-top: var(--space-3);
-
-    @include tablet-up {
-      width: auto;
-      justify-content: flex-start;
-    }
-
-    // SPでボタン文字が大きすぎて折れるのを防ぐ
-    .c-btn {
-      min-height: clamp(50px, 5vw, 60px);
-    }
-
-    // 電話ボタン文言：SPは短縮、tablet-up以上はフル（番号付き）
-    .hero__tel-full {
-      display: none;
-    }
-    .hero__tel-short {
-      display: inline;
-    }
-
-    @include tablet-up {
-      .hero__tel-full {
-        display: inline;
-      }
-      .hero__tel-short {
-        display: none;
-      }
-    }
   }
 </style>

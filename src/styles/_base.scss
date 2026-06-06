@@ -3,10 +3,6 @@
 // design-tokens（CSS変数）の後に読み込むこと
 // =============================================================
 
-:root {
-  --cv-bar-h: 76px; // スマホ追従CVバーの高さ
-}
-
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
@@ -29,13 +25,20 @@ body {
   // 横はみ出し防止（CLAUDE.md準拠：100vwではなく100%／hiddenではなくclip）
   width: 100%;
   overflow-x: clip;
+}
 
-  // スマホは追従CVバー分の余白を確保（バーが本文最下部を隠さないように）
-  padding-bottom: calc(var(--cv-bar-h) + env(safe-area-inset-bottom));
-
-  @include tablet-up {
-    padding-bottom: 0;
-  }
+// サイト全体の固定背景レイヤー（最背面）。スクロールしても固定され、
+// 各セクションの半透明背景ごしにうっすら見える。
+// position:fixed なので iOS Safari の background-attachment:fixed 不具合を回避できる。
+.page-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image: url("/page_bg.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  pointer-events: none;
 }
 
 img,

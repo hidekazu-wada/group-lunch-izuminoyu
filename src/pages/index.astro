@@ -3,7 +3,7 @@
 import '../styles/main.scss';
 
 import Head from '../components/layout/Head.astro';
-import CvBar from '../components/layout/CvBar.astro';
+import SiteHeader from '../components/layout/SiteHeader.astro';
 import CtaBand from '../components/layout/CtaBand.astro';
 import Footer from '../components/layout/Footer.astro';
 
@@ -28,6 +28,9 @@ import Contact from '../components/sections/Contact.astro';
     <Head />
   </head>
   <body>
+    {/* サイト全体の固定背景（最背面）。各セクションは半透明でこの上にうっすら重なる */}
+    <div class="page-bg" aria-hidden="true"></div>
+    <SiteHeader />
     <main>
       <Hero />
       <Scarcity />
@@ -46,6 +49,5 @@ import Contact from '../components/sections/Contact.astro';
     </main>
 
     <Footer />
-    <CvBar />
   </body>
 </html>
