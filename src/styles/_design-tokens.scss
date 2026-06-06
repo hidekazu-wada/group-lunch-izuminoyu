@@ -31,6 +31,10 @@
   --surface-brown-70: rgba(124, 99, 81, 0.7);    /* newsセクションのオーバーレイ */
   --surface-brown-solid: #7c6351;                /* フッターリンク・下層ページヘッダ */
 
+  /* Veils（固定背景 .page-bg をうっすら透かす半透明セクション背景／不透明度〜88%） */
+  --veil-page: rgba(240, 240, 240, 0.88);        /* #f0f0f0 の半透明：無指定セクション */
+  /* ※ cream / muted 指定セクションは背景なし（transparent）で固定背景を直に見せる */
+
   /* ---- TYPE ---- */
   --font-base: 'Zen Maru Gothic', 'Hiragino Maru Gothic ProN', 'YuGothic', sans-serif;
 

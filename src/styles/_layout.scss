@@ -19,9 +19,13 @@
 }
 
 // セクションの縦余白・背景バリエーション
+// 各セクションは半透明背景。固定背景(.page-bg)がうっすら透ける。
+// 濃色（blue/brown）と写真背景セクション(Onsen)はベタ維持。
 .l-section {
   position: relative;
   padding-block: var(--space-6);
+  // デフォルト（無指定）セクション：薄いページ色のベールで可読性を確保しつつ背景を透かす
+  background-color: var(--veil-page);
 
   @include tablet-up {
     padding-block: var(--space-7);
@@ -30,23 +34,23 @@
     padding-block: var(--space-8);
   }
 
-  // 明るいクリーム背景
+  // クリーム指定セクションは背景なし＝固定背景(.page-bg)をそのまま見せる
   &--cream {
-    background-color: var(--main_color_3);
+    background-color: transparent;
   }
 
-  // 落ち着いたグレー（ネガティブ/痛み系セクション）
+  // muted 指定セクションも背景なし＝固定背景(.page-bg)をそのまま見せる
   &--muted {
-    background-color: var(--surface-muted);
+    background-color: transparent;
   }
 
-  // 西湖ブルー（リード・自然/水のブロック限定）
+  // 西湖ブルー（リード・自然/水のブロック限定）。濃色はベタ維持
   &--blue {
     background-color: var(--blue_1);
     color: var(--main_color_3);
   }
 
-  // 茶ベタ
+  // 茶ベタ。濃色はベタ維持
   &--brown {
     background-color: var(--surface-brown-solid);
     color: var(--main_color_3);
