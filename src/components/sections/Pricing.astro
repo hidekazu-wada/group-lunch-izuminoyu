@@ -16,7 +16,7 @@ import { SITE } from '../../consts';
       <div class="pricing__row pricing__row--head" role="row">
         <span class="pricing__cell pricing__cell--use" role="columnheader">ご利用</span>
         <span class="pricing__cell pricing__cell--time" role="columnheader">滞在時間</span>
-        <span class="pricing__cell pricing__cell--price" role="columnheader">お一人さま</span>
+        <span class="pricing__cell pricing__cell--price" role="columnheader">施設使用料（1名）</span>
         <span class="pricing__cell pricing__cell--min" role="columnheader">最低保証</span>
       </div>
 
@@ -28,7 +28,7 @@ import { SITE } from '../../consts';
           <span class="pricing__label" aria-hidden="true">滞在時間</span>2時間
         </span>
         <span class="pricing__cell pricing__cell--price" role="cell">
-          <span class="pricing__label" aria-hidden="true">お一人さま</span>800円
+          <span class="pricing__label" aria-hidden="true">施設使用料（1名）</span>800円
         </span>
         <span class="pricing__cell pricing__cell--min" role="cell">
           <span class="pricing__label" aria-hidden="true">最低保証</span>30,000円
@@ -44,7 +44,7 @@ import { SITE } from '../../consts';
           <span class="pricing__label" aria-hidden="true">滞在時間</span>2＋1時間
         </span>
         <span class="pricing__cell pricing__cell--price" role="cell">
-          <span class="pricing__label" aria-hidden="true">お一人さま</span><strong>500円</strong>
+          <span class="pricing__label" aria-hidden="true">施設使用料（1名）</span><strong>500円</strong>
         </span>
         <span class="pricing__cell pricing__cell--min" role="cell">
           <span class="pricing__label" aria-hidden="true">最低保証</span>30,000円
@@ -59,7 +59,7 @@ import { SITE } from '../../consts';
           <span class="pricing__label" aria-hidden="true">滞在時間</span>1時間ごと
         </span>
         <span class="pricing__cell pricing__cell--price" role="cell">
-          <span class="pricing__label" aria-hidden="true">お一人さま</span>400円
+          <span class="pricing__label" aria-hidden="true">施設使用料（1名）</span>400円
         </span>
         <span class="pricing__cell pricing__cell--min" role="cell">
           <span class="pricing__label" aria-hidden="true">最低保証</span>—
@@ -67,8 +67,14 @@ import { SITE } from '../../consts';
       </div>
     </div>
 
-    <!-- 料金表の注記（用語補足＋ダミー注記） -->
+    <!-- 料金表の注記（税込＋費用範囲＋用語補足＋ダミー注記） -->
     <div class="pricing__notes">
+      <p class="c-note">
+        ※表示価格はすべて税込です。
+      </p>
+      <p class="c-note">
+        ※上記は<strong>貸切利用料</strong>です。お食事代（メニューにより異なります）・体験プログラムの料金は別途かかります。
+      </p>
       <p class="c-note">
         ※「最低保証」は、ご利用人数が少ない場合の貸切1組あたりの下限料金です。
       </p>
