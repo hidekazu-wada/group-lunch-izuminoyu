@@ -1,0 +1,4 @@
+# 🔴 公開準備中：クロール禁止。一般公開時に下記の Disallow を解除し、
+#    必要なら Sitemap 行を追加すること。
+User-agent: *
+Disallow: /

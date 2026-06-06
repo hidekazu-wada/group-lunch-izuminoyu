@@ -63,5 +63,8 @@ export const SEO = {
   title: 'いずみの湯 団体昼食｜西湖畔・最大250名・ひと組貸切（HAMAYOUリゾート）',
   description:
     '団体250名まで貸切。大型バス6台・温泉併設・アレルギー対応。河口湖／西湖の団体昼食処。立寄り昼食・教育旅行・チェックアウト後の食事手配をまるごとサポートします。',
+  siteName: 'いずみの湯 団体昼食（HAMAYOUリゾート）',
+  // 🔴 公開準備中は true（検索エンジンにインデックスさせない）。一般公開のタイミングで false にする
+  noindex: true,
   // OGP画像は Head.astro で src/assets のヒーロー画像から getImage で生成（このパスは未使用）
 } as const;
