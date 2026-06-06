@@ -1,7 +1,61 @@
 ---
 // ⑫ よくある質問（FAQ）
 // JSなしのアコーディオン（details/summary）。開閉アイコンはCSS擬似要素で＋/−
+// Q&Aは1つの配列から「画面表示」と「FAQPage 構造化データ」を生成（ズレ防止）
 import { SITE } from '../../consts';
+
+const faqs = [
+  {
+    // 🔴 人数下限 未確定（ダミー）
+    q: '何名から利用できますか？',
+    a: `${SITE.capacityMin}名から承ります。最大${SITE.capacityMax}名まで貸切でお迎えできます。`,
+  },
+  {
+    q: '大型バスは停められますか？',
+    a: '大型バス6台まで駐車可能（駐車料込み）です。',
+  },
+  {
+    q: '雨が降っても大丈夫ですか？',
+    a: '約100畳の屋内休憩「ゆのわ堂」をご利用いただけます。',
+  },
+  {
+    q: 'アレルギーに対応できますか？',
+    a: '対応いたします。原材料表もご用意しています。',
+  },
+  {
+    q: '食事のあとに温泉も入れますか？',
+    a: '併設「いずみの湯」でそのままご入浴いただけます。',
+  },
+  {
+    q: '予約はいつまでに？',
+    a: '団体予約制です。お早めにお問い合わせください（貸切・お土産手配は事前予約制）。',
+  },
+  {
+    // 🔴 支払い方法 未確定（ダミー）。確定後に文面差し替え
+    q: 'お支払い方法は？',
+    a: '当日現金のほか、請求書でのお支払い（後日お振込）にも対応しています。詳細はお問い合わせ時にご案内します。',
+  },
+  {
+    // 🔴 キャンセル・人数変更規定 未確定（ダミー）。確定後に文面差し替え
+    q: 'キャンセルや人数変更はいつまで可能ですか？',
+    a: 'ご予約状況により異なります。確定後の変更はお早めにご相談ください。',
+  },
+  {
+    q: '事前の下見や打ち合わせはできますか？',
+    a: '可能です。ご希望の日程をご相談ください。当日の流れも事前にすり合わせできます。',
+  },
+];
+
+// FAQPage 構造化データ（SEO：FAQリッチリザルト対象）
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
 ---
 
 <section class="l-section faq" id="faq">
@@ -11,50 +65,23 @@ import { SITE } from '../../consts';
     </div>
 
     <div class="faq__list">
-      <!-- 🔴 人数下限 未確定（ダミー） -->
-      <details class="faq__item">
-        <summary class="faq__q">Q.何名から利用できますか？</summary>
-        <div class="faq__a">
-          A.{SITE.capacityMin}名から承ります。最大{SITE.capacityMax}名まで貸切でお迎えできます。
-        </div>
-      </details>
-
-      <details class="faq__item">
-        <summary class="faq__q">Q.大型バスは停められますか？</summary>
-        <div class="faq__a">
-          A.大型バス6台まで駐車可能（駐車料込み）です。
-        </div>
-      </details>
-
-      <details class="faq__item">
-        <summary class="faq__q">Q.雨が降っても大丈夫ですか？</summary>
-        <div class="faq__a">
-          A.約100畳の屋内休憩「ゆのわ堂」をご利用いただけます。
-        </div>
-      </details>
-
-      <details class="faq__item">
-        <summary class="faq__q">Q.アレルギーに対応できますか？</summary>
-        <div class="faq__a">
-          A.対応いたします。原材料表もご用意しています。
-        </div>
-      </details>
-
-      <details class="faq__item">
-        <summary class="faq__q">Q.食事のあとに温泉も入れますか？</summary>
-        <div class="faq__a">
-          A.併設「いずみの湯」でそのままご入浴いただけます。
-        </div>
-      </details>
-
-      <details class="faq__item">
-        <summary class="faq__q">Q.予約はいつまでに？</summary>
-        <div class="faq__a">
-          A.団体予約制です。お早めにお問い合わせください（貸切・お土産手配は事前予約制）。
-        </div>
-      </details>
+      {
+        faqs.map((f) => (
+          <details class="faq__item">
+            <summary class="faq__q">Q.{f.q}</summary>
+            <div class="faq__a">A.{f.a}</div>
+          </details>
+        ))
+      }
     </div>
+
+    <p class="faq__contact">
+      解決しない場合は、<a class="faq__contact-link" href="#contact">お問い合わせ</a>からお気軽にご相談ください。
+    </p>
   </div>
+
+  {/* FAQ 構造化データ（FAQPage） */}
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(faqJsonLd)} />
 </section>
 
 <style lang="scss">
@@ -139,5 +166,28 @@ import { SITE } from '../../consts';
     font-size: var(--fs-body);
     line-height: var(--lh-loose);
     color: var(--main_color_1);
+  }
+
+  // ---- お問い合わせ導線 ----
+  .faq__contact {
+    margin-top: var(--space-4);
+    text-align: center;
+    font-size: var(--fs-body);
+    line-height: var(--lh-loose);
+    color: var(--main_color_1);
+  }
+
+  .faq__contact-link {
+    color: var(--main_color_1);
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+    transition: color var(--dur-base) var(--ease-soft);
+
+    @include hover {
+      &:hover {
+        color: var(--main_color_2);
+      }
+    }
   }
 </style>
