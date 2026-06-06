@@ -3,7 +3,8 @@
 // 西湖畔の施設までの案内。情報ブロック＋Googleマップ（SP縦／PC2カラム）
 import { SITE } from '../../consts';
 import { Image } from 'astro:assets';
-import busParking from '../../assets/images/flyer/facility_1_bus_parking.png';
+// ②（希少性セクション）と同じ貸切駐車場の画像を共用
+import busParking from '../../assets/images/scarcity/private_lakeside.png';
 ---
 
 <section class="l-section l-section--cream access" id="access">
@@ -17,7 +18,7 @@ import busParking from '../../assets/images/flyer/facility_1_bus_parking.png';
       <!-- 情報ブロック -->
       <div class="access__info c-card">
         <p class="access__facility">
-          HAMAYOUリゾート Wonder Child Park ／ いずみの湯
+          HAMAYOUリゾート いずみの湯／Wonder Child Park
         </p>
 
         <dl class="access__list">
@@ -35,6 +36,14 @@ import busParking from '../../assets/images/flyer/facility_1_bus_parking.png';
           </div>
 
           <div class="access__row">
+            <dt class="access__term">アクセス</dt>
+            <dd class="access__desc">
+              <!-- 🔴 アクセス経路の目安 未確定（consts.ts に集約／確定後そこを差し替え） -->
+              {SITE.accessRoute}
+            </dd>
+          </div>
+
+          <div class="access__row">
             <dt class="access__term">営業時間</dt>
             <dd class="access__desc">
               <!-- 🔴 営業時間・営業日 未確定（ダミー） -->
@@ -47,7 +56,7 @@ import busParking from '../../assets/images/flyer/facility_1_bus_parking.png';
         <figure class="access__figure c-figure">
           <Image
             src={busParking}
-            alt="大型バスの駐車スペース"
+            alt="西湖畔の貸切サイトにゆったり停まる大型バス"
             width={900}
             format="webp"
             loading="lazy"
@@ -62,8 +71,13 @@ import busParking from '../../assets/images/flyer/facility_1_bus_parking.png';
             target="_blank"
             rel="noopener"
           >
-            地図を開く（Googleマップ）
+            ここからのルートを表示（Googleマップ）
           </a>
+        </p>
+
+        {/* 🔴 住所・営業時間・アクセス経路は確定後に consts.ts を差し替え */}
+        <p class="access__note c-note">
+          ※住所・営業時間・アクセス経路は、確定しだいご案内します。
         </p>
       </div>
 

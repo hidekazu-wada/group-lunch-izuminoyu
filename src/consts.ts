@@ -30,9 +30,12 @@ export const SITE = {
     'https://maps.google.com/maps?q=' +
     encodeURIComponent('山梨県南都留郡富士河口湖町西湖987') +
     '&z=15&hl=ja&output=embed',
+  // 現在地からいずみの湯までの経路案内（origin省略＝現在地起点。スマホはマップアプリでルート起動）
   mapLink:
-    'https://www.google.com/maps/search/?api=1&query=' +
+    'https://www.google.com/maps/dir/?api=1&destination=' +
     encodeURIComponent('山梨県南都留郡富士河口湖町西湖987'),
+  // 🔴 アクセス経路の目安 未確定（ダミー）。大型バス手配者向けの高速経路目安
+  accessRoute: '中央自動車道・河口湖ICから約25分（西湖方面）',
 
   // --- 規模・条件 ---
   capacityMax: 250,
