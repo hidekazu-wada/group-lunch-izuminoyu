@@ -5,20 +5,24 @@ import molkky from "../../assets/images/activities/molkky.png";
 import kunimasu from "../../assets/images/activities/kunimasu.png";
 import jukai from "../../assets/images/activities/jukai.png";
 
+// 🔴 各体験の説明文は仮（ダミー）。実際の内容に合わせて確定後に差し替え
 const activities = [
   {
     img: molkky,
     name: "モルック体験",
+    desc: "フィンランド生まれの木製ピン倒し。ルールは簡単、老若男女みんなで盛り上がれる団体レクの定番です。",
     tags: ["10〜100名", "約2時間", "雨天対応"],
   },
   {
     img: kunimasu,
     name: "クニマス学習",
+    desc: "西湖で“奇跡の再発見”をとげたクニマスを学ぶプログラム。富士の自然と命のつながりを楽しく学べます。",
     tags: ["10〜200名", "約2時間〜", "雨天対応"],
   },
   {
     img: jukai,
     name: "樹海トレイル",
+    desc: "ガイドと歩く青木ヶ原樹海。溶岩がつくった神秘の森で、富士山の成り立ちを体感できる人気コースです。",
     tags: ["青木ヶ原", "10〜100名", "約2〜2.5時間", "雨天対応"],
   },
 ];
@@ -48,6 +52,7 @@ const activities = [
               />
             </figure>
             <h3 class="plus-alpha__title">{a.name}</h3>
+            <p class="plus-alpha__desc">{a.desc}</p>
             <ul class="plus-alpha__tags">
               {a.tags.map((t) => (
                 <li>
@@ -113,6 +118,13 @@ const activities = [
     font-size: var(--fs-h3);
     font-weight: 700;
     line-height: var(--lh-tight);
+  }
+
+  // やってみたくなる短い説明
+  .plus-alpha__desc {
+    font-size: var(--fs-meta);
+    line-height: var(--lh-loose);
+    color: var(--main_color_1);
   }
 
   .plus-alpha__tags {

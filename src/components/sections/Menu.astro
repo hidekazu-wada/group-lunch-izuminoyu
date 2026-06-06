@@ -1,5 +1,14 @@
 ---
 // ⑥ お食事メニュー — 料理写真は未支給のためプレースホルダ。各料理に短い“美味しそう”な一言を追加
+// 背景：menu_bg を ⑧Onsen と同方式（背景画像＋オーバーレイ）で。オーバーレイは黒系
+// PC/SPで画像を出し分け（SPは menu_bg-sp）
+import { getImage } from "astro:assets";
+import menuBgSrc from "../../assets/images/menu/menu_bg.jpg";
+import menuBgSpSrc from "../../assets/images/menu/menu_bg-sp.jpg";
+
+const menuBg = await getImage({ src: menuBgSrc, width: 1600, format: "webp" });
+const menuBgSp = await getImage({ src: menuBgSpSrc, width: 900, format: "webp" });
+
 const menus = [
   {
     name: "カレーライス",
@@ -23,7 +32,12 @@ const menus = [
 ---
 
 <section class="l-section menu" id="menu">
-  <div class="l-container">
+  <div
+    class="menu__bg"
+    aria-hidden="true"
+    style={`--menu-bg-pc: url(${menuBg.src}); --menu-bg-sp: url(${menuBgSp.src})`}
+  ></div>
+  <div class="l-container menu__inner">
     <header class="c-head">
       <h2 class="c-head__title">美しい湖を眺めて、みんなで同じ食卓を。</h2>
     </header>
@@ -64,6 +78,48 @@ const menus = [
   @import "../../styles/variables";
   @import "../../styles/functions";
   @import "../../styles/mixins";
+
+  // 背景：料理写真＋黒系グラデオーバーレイ（⑧Onsenと同方式）
+  .menu {
+    position: relative;
+    overflow: clip;
+  }
+
+  .menu__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    // SPは menu_bg-sp、tablet-up以上は menu_bg。黒系グラデオーバーレイを重ねる
+    background-image:
+      linear-gradient(
+        165deg,
+        rgba(20, 16, 14, 0.7) 0%,
+        rgba(20, 16, 14, 0.82) 100%
+      ),
+      var(--menu-bg-sp);
+    background-size: cover;
+    background-position: center;
+
+    @include tablet-up {
+      background-image:
+        linear-gradient(
+          165deg,
+          rgba(20, 16, 14, 0.7) 0%,
+          rgba(20, 16, 14, 0.82) 100%
+        ),
+        var(--menu-bg-pc);
+    }
+  }
+
+  .menu__inner {
+    position: relative;
+    z-index: 1;
+  }
+
+  // 見出し・注記はオーバーレイ上に直接乗るのでクリームに反転
+  .menu :global(.c-head__title) {
+    color: var(--main_color_3);
+  }
 
   .menu__list {
     display: grid;
@@ -137,5 +193,11 @@ const menus = [
     display: flex;
     flex-direction: column;
     gap: var(--space-2);
+  }
+
+  // 注記はオーバーレイ上に直接乗るのでクリームに反転
+  .menu__notes :global(.c-note) {
+    color: var(--main_color_3);
+    opacity: 0.9;
   }
 </style>

@@ -123,8 +123,15 @@ const pains = [
       gap: var(--space-6);
 
       > * {
-        flex: 1 1 0;
         min-width: 0;
+      }
+
+      // 対比画像のカラムを痛みリストより広めにして、画像を大きく見せる
+      .scarcity__pains {
+        flex: 1 1 0;
+      }
+      .scarcity__contrast {
+        flex: 1.4 1 0;
       }
     }
   }
@@ -136,16 +143,19 @@ const pains = [
     gap: var(--space-2);
   }
 
+  // 痛みカード：暖色を含む濃いめのグレー（チャコールブラウン）＋赤バーで「気がかり」を表現
   .scarcity__pain {
     display: flex;
     align-items: flex-start;
     gap: var(--space-2);
-    padding: var(--space-2) var(--space-3);
-    background-color: var(--white);
+    padding: var(--space-3) var(--space-3) var(--space-3) var(--space-4);
+    background-color: #4a4340; // 暖色寄りのダークグレー（サイトの茶トーンに馴染ませる）
+    border-left: 4px solid var(--accent-red); // 警告の赤バー
     border-radius: var(--radius-card);
-    box-shadow: var(--shadow-soft);
+    box-shadow: var(--shadow-card);
     font-size: var(--fs-body);
     line-height: var(--lh-body);
+    color: var(--main_color_3); // クリームに反転
   }
 
   // 注意ドット（赤）＝“気がかり”の印
