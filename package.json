@@ -9,7 +9,7 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^7.4.4",
+    "astro": "^7.4.7",
     "sass": "^1.107.0"
   },
   "devDependencies": {
